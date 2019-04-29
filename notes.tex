@@ -18,8 +18,7 @@
 \usepackage[final]{changes}
 \setdeletedmarkup{{\color{red}\sout{#1}}}
 \usepackage{todonotes}
-\newcommand{\dls}[2][]{\todo[color=green!40,#1]{DLS: #2}}
-\newcommand{\bd}[2][]{\todo[color=red!40,#1]{BD: #2}}
+\newcommand{\kk}[2][]{\todo[color=purple!20,#1]{KK: #2}}
 
 %\usepackage[backend=biber,style=authoryear]{biblatex}
 %\bibliography{ref.bib}
@@ -60,17 +59,20 @@
 \begin{document}
 \section{Introduction}
 \begin{itemize}
-    \item We assume that a sample of random variables $X_1, \dotsc, X_n$ is i.i.d with d.f. $F \in \mathcal{F}\subset \R$. $\theta(F)$ is a functional defined on $\mathcal{F}$. 
+    \item $\theta = \theta(F)$ is defined as a functional, which is a mapping from a space $X$ into the reals. 
+    \item We let $\mathcal{F}$ be the set of distribution function on $\mathbb{R}$
+    \item We assume that a sample of random variables $X_1, \dotsc, X_n$ is i.i.d with d.f. $F \in \mathcal{F}\subset \R$. Note that $F$ is unknown but $\mathcal{F}$ is known. For example, $\mathcal{F}$ can be Exponential family? $\theta(F)$ is a functional defined on $\mathcal{F}$. 
     \item P.R. Halmos: 
     \begin{itemize}
         \item Does there exist an estimator of $\theta = \theta(F)$ that is unbiased, no matter what $F$ is. Can we characterize the sets $\mathcal{F}$ and $\theta$ for which the answer is yes.
         \item What is this estimator? What is the best estimator?
     \end{itemize}
-    \item a function $\theta(F)$ is said to admit an unbiased estimator if \begin{align}\label{unbiased}
-        E(f_n(X_1, \dotsc, X_n)) = \theta(F)
+    \item suppose that for each sufficiently large $n$, there is a function $f_n$ such that \begin{align}\label{unbiased}
+        E(f_n(X_1, \dotsc, X_n)) = \theta(F).
     \end{align}
-    where $f_n(X_1, \dotsc, X_n)$ is a function of the n random variables. 
+    Then, $\theta(F)$ is said to admit an unbiased estimator 
    \begin{theorem}
+   (Halmos. Characterizing functionals)
     A functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
     \begin{align}\label{unbiased_est}
         \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
@@ -79,13 +81,9 @@
     \end{theorem}
     Here, $\theta$ is called a \textbf{regular statistical functional} of degree k and $\psi$ is called \textbf{the kernel} of the functional. 
     
-    \item Estimates in this setting only depend on the k observations but we want to restrict to estimators of the form 
-    \begin{align}
-        \hat{\theta} = f_n(x_1, \dotsc, x_n)
-    \end{align}
-    such that $f_n$ is a symmetric function that satisfies Equation \ref{unbiased} since the variables are i.i.d.
+    \item However, a more intuitive estimator is one that is based on a symmetric $\psi$ and incorporates all the data $X_1, \dotsc, X_n$ since the data is i.i.d. Here, symmetric means that it is invariant to permutations of the data, i.e. $f(x_1, x_2, x_3) = f(x_2, x_3, x_1)$. Thus, we consider functions $f_n$ that are symmetric and satisfies Equation \ref{unbiased}.
     
-    \item We say that estimates are identical if they agree on some Borel set $E$, which depends on $\mathcal{F}$.
+    \item With a sufficiently large $\mathcal{F}$, i.e. it contains all distributions with finite support in $E$, the Borel set, it turns out that there is a unique symmetric unbiased estimator, up to equality on $E$, i.e. they agree on some Borel set $E$. \kk{What exactly does this mean?} Note the choice of $E$ depends on $\mathcal{F}$. 
     
     \begin{theorem}\label{unique}
     Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let $\theta$ be a regular functional satisfying Equation \ref{unbiased_est}. Then up to equality on $E$, there is a unique symmetric unbiased estimator of $\theta$. 
@@ -151,6 +149,7 @@
         \begin{align*}
         \hat{\theta} = {n \choose k}^{-1} \sum_{(n,k)} \psi^{[k]}(X_{i_1}, \dotsc, X_{i_k})
     \end{align*} 
+    \kk{What are regular functionals?}
     \item Examples include:
     \begin{itemize}
         \item Sample mean: $\mathcal{F}$ is set of all distributions whose means exist, i.e. it contains all distributions having finite support on $\R$. The functional is $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. The U-statistic if $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$
@@ -191,6 +190,23 @@
     \end{enumerate}
     \end{proof}
     
+    Note that there is an easier proof:
+    \begin{proof}
+    \begin{enumerate}[label = (\roman*)]
+        \item We have that for $1 \leq c <d \leq k$
+        \begin{align*}
+            E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)) &= E(E(\psi(X_1, \dotsc, X_c, X_{c+1}, \dotsc, X_k)|x_1, \dotsc x_{d})|x_1, \dotsc, x_c)\\
+            &= E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_c) &&\text{[since $c<d$]}\\
+            &=\psi_c(x_1, \dotsc, x_c)
+        \end{align*}
+        
+        \item 
+        \begin{align*}
+            E(\psi_c(X_1, \dotsc, X_c)) &= E(E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_c)) \\
+            &=E(\psi(X_1, \dotsc, X_k))\\
+        \end{align*}
+    \end{enumerate}
+    \end{proof}
     \item Another way to write $\sigma_c^2$ is 
     \begin{align*}
         \sigma_c^2 = cov(\psi(S_1), \psi(S_2))
