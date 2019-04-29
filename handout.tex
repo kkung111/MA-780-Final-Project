@@ -1,0 +1,139 @@
+%\documentclass[twocolumn]{article}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx,algpseudocode}
+\usepackage{geometry, amssymb, amsmath, amsthm}
+\usepackage{bbm}
+\usepackage{enumitem}   
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{chngpage}
+\usepackage{breqn}
+\usepackage{color,soul}
+\usepackage{algorithm}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{ref.bib}
+\linespread{1.3}
+\geometry{margin=1in, headsep=0.25in}
+
+\parindent 0in
+\parskip 0.1in
+
+\usepackage[final]{changes}
+\setdeletedmarkup{{\color{red}\sout{#1}}}
+\usepackage{todonotes}
+\newcommand{\kk}[2][]{\todo[color=purple!20,#1]{KK: #2}}
+
+%\usepackage[backend=biber,style=authoryear]{biblatex}
+%\bibliography{ref.bib}
+
+% \usepackage[margin=1.0in]{geometry}
+% \parskip = 0.1in
+
+
+%%%%%%%%%%new commands%%%%%%%%%%%%
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\nsum}{{\sum_{i=1}^n}}
+\newcommand{\E}{{\mathbb{E}}}
+\newcommand{\V}{{\text{Var}}}
+\newcommand{\prob}{{\mathbb{P}}}
+\newcommand{\bvar}[1]{\mathbf{#1}} 
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{Lemma}{Lemma}
+
+\newtheorem{Def}{Definition}
+\numberwithin{Def}{section}
+\newtheorem{ex}{Example}
+\newtheorem{Prop}{Proposition}
+\newtheorem{Cor}[theorem]{Corollary}
+\newtheorem{Rmk}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+\title{U-Statistics}
+\author{Lily Chou, Kelly Kung, and Zihuan Qiao}
+\date{\today}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+{\LARGE \bf U-Statistics}\\
+{\large Lily Chou, Kelly Kung, Zihuan Qiao}\\
+May 2, 2019
+\end{center}
+
+Throughout this semester in Probability Theory II, we have learned many concepts such as Law of Large Numbers, Central Limit Theorem, and Martingales. U-Statistics is an example from Statistics where many of the Probability concepts can be applied to. We begin the discussion of U-Statistics with some background information.
+
+\section{Introduction}
+Before introducing the concept of U-Statistics, we will first define terms and set notation that will be used throughout this handout. 
+\begin{Def}{}
+We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of distribution functions on $\R$, i.e. $\theta = \theta(F), F \in \mathcal{F}$.
+\end{Def}
+
+\begin{Def}{}
+For every sufficiently large $n$, we say that $\theta$ \text{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
+\end{Def}
+
+In 1946, Paul Halmos asked two questions that prompted the study of U-Statistics:
+\begin{enumerate}
+    \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
+    \item If such an estimator exists, what is it? If several exist, which is the best?
+\end{enumerate}
+
+These questions will be answered throughout this handout. In fact, Halmos answers the part of the first question with the following theorem. 
+\begin{theorem}
+With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
+\begin{align}\label{unbiased_est}
+    \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Note that for $n \geq k$, if we let $f_n(X_1, \dotsc, X_n) = \psi(X_1, \dotsc, X_k)$, we have that Equation $(2)$ satisfies the condition of unbiasedness in Equation $(1)$. Furthermore, letting $n=k$ implies that Equation $(2)$ is equivalent to Equation $(3)$. Thus $(2) \iff (3)$. 
+\end{proof}
+
+\begin{Def}
+A functional $\theta(F)$ that satisfies Equation (2) for some function $\psi$ is called a \textit{regular statistical functional of degree k}. Also, the function $\psi$ is called the \textit{kernel} of the functional. 
+\end{Def}
+
+In Theorem 1, the kernel function is only evaluated at $k$ random variables, but since we assume that we have independent identically distributed random variables $X_1, \dotsc, X_n$, it intuitively makes sense that we want a symmetric kernel function that is evaluated at all $n$ observations. 
+
+\begin{Def}
+A function is \textit{symmetric} if it is invariant under permutations of its arguments. 
+\end{Def}
+
+With a symmetric kernel function and a large enough Borel set $E$, we can state the following theorems. First, we state a lemma.
+
+\begin{Lemma}\label{lemA}
+Let $\mathcal{F}$ contain all distributions with finite support in E, and let $f$ be a symmetric function of n variables with 
+    \begin{align*}
+        \int \dotsc \int_{\R_n} f(x_1, \dotsc, x_n) \prod_{i=1}^n dF(x_i) = 0 \text{ for all } F \in \mathcal{F}
+    \end{align*}
+    Then $f(x_1, \dotsc, x_n) = 0$ whenever $x_i \in E, i = 1, \dotsc, n$. 
+\end{Lemma}
+
+\begin{theorem}\label{unique}
+Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let $\theta$ be a regular functional satisfying Equation \ref{unbiased_est}. Then up to equality on $E$, there is a unique symmetric unbiased estimator of $\theta$. Here, estimators are identical if they agree on the Borel set $E$.
+\end{theorem}
+\begin{proof}
+Note that the kernel function $\psi(x_1, \dotsc, x_k)$ may not be symmetric, and so we define a symmetric function $\psi^{[n]}(x_1, \dotsc, x_n) = \frac{(n-1)!}{n!}\sum \psi(x_{i_1}, \dotsc, x_{i_k})$ where the sum is taken over all permutations of $\{i_1, \dotsc, i_k\}$ distinct integers from $\{1, \dotsc, n\}$. Since the random variables are i.i.d and $\psi(x_{i_1}, \dotsc, x_{i_k})$ is a kernel function, we know that $\psi^{[n]}$ is unbiased. Consider another symmetric unbiased estimator $f$, and we consider $f - \psi^{[n]}$. By Lemma \ref{lemA}, since both $f$ and $\psi^{[n]}$ are unbiased, we know that $E(f - \psi^{[n]}) = 0$, which implies $f - \psi^{[n]} = 0$, i.e. $f = \psi^{[n]}$. 
+\end{proof}
+
+ \begin{theorem}
+    Suppose that $E = \R$. Let $\theta$ be a regular functional of degree k defined by Equation \ref{unbiased_est} on a set of $\mathcal{F}$ of distribution functions containing all distributions having finite support. Let $f$ be an unbiased estimate of $\theta$ based on a sample of size n, so that $f$ satisfies Equation \ref{unbiased}. Then $var(f) \geq var(\psi^{[n]})$ for all $F \in \mathcal{F}$. 
+    \end{theorem}
+    
+   \begin{proof}
+    Define $f^{[n]}(x_1, \dotsc, x_n) = \frac{1}{n!}\sum_{(n)}f(x_{i_1}, \dotsc, x_{i_n})$ where the sum $\sum_{(n)}$ is taken over all permutations $(i_1, \dotsc, i_n)$ of $\{1, \dotsc, n\}$. Then $f^{[n]}$ is a symmetric unbiased estimator, and so by Theorem \ref{unique} agrees with $\psi^{[n]}$ on $\R$. Since both estimators are unbiased, we just have to show the inequality using second moments. Using the Cauchy-Schwartz Inequality gives $(\psi^{[n]})^2 \leq \frac{1}{n!}\sum_{(n)}f^2(x_{i_1}, \dotsc, x_{i_n})$. Then, taking the expected value of the inequality gives $E((\psi^{[n]})^2) \leq E(f^2(x_{i_1}, \dotsc, x_{i_n}))$. This implies that $var(f) \geq var(\psi^{[n]})$.
+    \end{proof}
+    
+    \section{U-Statistics}
+    U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948. 
+\end{document}
