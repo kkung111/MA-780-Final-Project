@@ -135,5 +135,53 @@ Note that the kernel function $\psi(x_1, \dotsc, x_k)$ may not be symmetric, and
     \end{proof}
     
     \section{U-Statistics}
-    U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948. 
+    U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948. U-statistics are of the form 
+    \begin{align}\label{u_stat}
+        U_n = {n \choose k}^{-1}\sum_{(n,k)}\psi(X_{i_1}, \dotsc, X_{i_k})
+    \end{align}
+
+Some examples of U-statistics include:
+\begin{ex}\textbf{Sample mean}
+Let $\mathcal{F}$ be the set of all distributions whose means exist, such that $\mathcal{F}$ contains all distributions that have finite support on $\R$. The mean functional is given by $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. Using Equation \ref{u_stat}, we have that $k=1$ and $\psi(X_{i_1}) = x_{i_1}$, which gives $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+\end{ex}
+
+\begin{ex}\textbf{Sample variance}
+Let $\mathcal{F}$ be the set of all distributions with finite second moment, i.e. $\mathcal{F} = \{F: \int |x|^2 dF(x)<\infty\}$. The variance functional is given by $\theta(F) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{2}(x_1 - x_2)^2 dF(x_1)dF(x_2)$. Here, we have that $k=2$ and $\psi(X_{i_1}, X_{i_2}) = \frac{1}{2}(x_{i_1} - x_{i_2})^2$, which gives $s_n^2 = {n \choose 2}^{-1}\sum_{1 \leq i < j \leq n}\frac{1}{2}(X_i - X_j)^2$.
+\end{ex}
+
+\begin{ex}\textbf{Kendall's Tau} Here, we consider two points $P_1$ and $P_2$ on a plane. We say that $P_1$ and $P_2$ are concordant if the line joining the points have positive slope, and otherwise, they are discordant. Here, we let $\mathcal{F}$ be the set of distribution functions with all absolutely continuous bivariate random vectors. The functional $\tau = \mathbb{P}(P_1, P_2 \text{ concordant}) - \mathbb{P}(P_1, P_2 \text{ discordant})$. We define the kernel $t$ as 
+\begin{align*}
+    t(P_1, P_2) = \begin{cases} 1 & \text{if $P_1$ and $P_2$ are concordant} \\ -1 & \text{if $P_1$ and $P_2$ are discordant} = sgn(X_1 - X_2)(Y_1 - Y_2).
+    \end{cases}
+\end{align*}
+Note that $E(t(P_1, P_2)) = \mathbb{P}(P_1, P_2 \text{ concordant}) - \mathbb{P}(P_1, P_2 \text{ discordant})$, which verifies that $t(P_1, P_2)$ is indeed a kernel. Also, here, we have $k=2$. Using Equation \ref{u_stat}, we have that the estimator of Kendall's tau is $\tau_n = {n \choose 2}\sum_{(n,2)}t(P_i, P_j)$.
+\end{ex}
+
+\subsection{Variance of U-Statistics}
+In the case of i.i.d random variables, we can express the variance of U-statistics in terms of conditional expectations. 
+
+\begin{Def}
+Given $c = 1, \dotsc, k$, we denote \begin{align}
+    \psi_c(x_1, \dotsc, x_c) = E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc X_k))
+\end{align}
+as the \textit{conditional expectation}. We also denote the variance of the conditional expectation as 
+\begin{align}
+    \sigma_c^2 = var(\psi_c(X_1, \dotsc, X_c))
+\end{align}
+where $\sigma_0^2 = 0$. 
+\end{Def}
+The conditional expectation has a useful theorem. 
+
+\begin{theorem}\label{cond_exp}
+The functions $\psi_c$ defined above have the properties
+        \begin{enumerate}[label = (\roman*)]
+            \item $\psi_c(x_1, \dotsc, x_c) = E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)), \text{ for } 1 \leq c <d \leq k$
+            \item $E(\psi_c(X_1, \dotsc, X_c)) = E(\psi(X_1, \dotsc, X_k))$
+        \end{enumerate}
+\end{theorem}
+\begin{proof}
+To prove Theorem 4, we rely on the Tower Property. Part (i) is given by \begin{align*}
+ E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)) = E(E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d|X_1, \dotsc, X_d))|x_1, \dotsc, x_c)  = E(\psi(x_1, \dotsc, x_d)|x_1, \dotsc, x_c)  
+\end{align*}
+\end{proof}
 \end{document}
