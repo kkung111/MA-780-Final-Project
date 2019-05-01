@@ -138,7 +138,7 @@ Note that the kernel function $\psi(x_1, \dotsc, x_k)$ may not be symmetric, and
  There is an equivalent theorem with results similar to Theorem 2 and Theorem 3 for when $\mathcal{F}$ contains distribution functions containing all absolutely continuous distribution functions. 
  \end{Rmk}
  
-    \section{U-Statistics}
+    \section{U-statistics}
     U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948 (\cite{hoeffding1948}). U-statistics are of the form 
     \begin{align}\label{u_stat}
         U_n = {n \choose k}^{-1}\sum_{(n,k)}\psi(X_{i_1}, \dotsc, X_{i_k})
@@ -265,7 +265,7 @@ since there are ${n \choose k_2}{k_2 \choose c}{n-k_2 \choose k_1 - c}$ ways to 
     \end{proof}
     
 \subsection{H-Decomposition}
-U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, 2$ that has variances of decreasing order in $n$ (\cite{hoeffding1961strong}). Using this decomposition, it is easier to prove some of the  results discussed later on in this handout. 
+U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, k$ that has variances of decreasing order in $n$ (\cite{hoeffding1961strong}). Using this decomposition, it is easier to prove some of the  results discussed later on in this handout. 
 
 We first introduce kernels $h^{(1)}, \dotsc, h^{(k)}$ of degrees $1, \dotsc, k$ that are defined recursively: 
 \begin{align}
@@ -287,7 +287,7 @@ Then,
 First, let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which is summed over all $j$-subsets $\{\nu_1, \dotsc, \nu_j\}$ of $\{1, \dotsc, n\}$. Then, we have the relationship $\sum_{(n,k)}S_j\{i_1, \dotsc, i_k\} = {n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which holds due to the identity ${n-j \choose k-j}{n \choose j} = {n \choose k}{k \choose j} \implies {n \choose k}^{-1}{n-j \choose k-j} = {k \choose j}{n \choose j}^{-1}$. We can then decompose $U_n$ as follows.
 \begin{align*}
     U_n &= {n \choose k}^{-1}\sum_{(n,k)}\psi(x_{i_1}, \dotsc, x_{i_k}) = {n \choose k}^{-1}\sum_{(n,k)}\left[\sum_{j=1}^kS_j\{i_1, \dotsc, i_k\} + \theta \right] &&\text{[from Eq. \ref{h_recursive} with $c = k$]} \\
-    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) = \theta + {n \choose k}^{-1}\sum_{j=1}^n{k \choose j}H_n^{(j)}
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^k{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) = \theta + {n \choose k}^{-1}\sum_{j=1}^k{k \choose j}H_n^{(j)}
 \end{align*}
 \end{proof}
 
@@ -373,7 +373,7 @@ Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\
 \begin{proof}
 The $\sigma$-fields $\mathcal{F}_n$ are increasing clearly. It's also easy to check the integrability of random variables $H_n^{(c)}$: Since $h^{(1)}(x_1)=\psi_1(x_1)-\theta$ and $\psi(X_1)$ is integrable, then $h^{(1)}(X_1)$ is integerable. By
 \begin{align*}
-h^{(c)}(x_1,\dotsc,x_c)=\psi(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
+h^{(c)}(x_1,\dotsc,x_c)=\psi_c(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
 \end{align*}
 Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
 Then we have 

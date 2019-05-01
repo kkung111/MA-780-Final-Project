@@ -1,5 +1,5 @@
-%\documentclass{beamer}
-\documentclass[handout]{beamer}
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
 
 % For more themes, color themes and font themes, see:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
@@ -52,7 +52,7 @@
 \newtheorem{Cor}[theorem]{Corollary}
 \newtheorem{Rmk}{Remark}
 % Here's where the presentation starts, with the info for the title slide
-\title{U-Statistics}
+\title{U-statistics}
 \author{Lily Chou, Kelly Kung, Zihuan Qiao}
 \institute{Probability Theory II}
 \date{\today}
@@ -78,20 +78,20 @@ We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of di
 For every sufficiently large $n$, we say that $\theta$ \textit{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
 \end{Def}
 \end{frame}
-\begin{frame}{Background Information}
-The theory of U-statistics started with Paul Richard Halmos (\cite{halmos1946theory}) when he proposed two questions:
-\begin{enumerate}
-\pause
-    \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
-\pause
-    \item If such an estimator exists, what is it? If several exist, which is the best?
-\end{enumerate}
-\end{frame}
+% \begin{frame}{Background Information}
+% The theory of U-statistics started with Paul Richard Halmos (\cite{halmos1946theory}) when he proposed two questions:
+% \begin{enumerate}
+% \pause
+%     \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
+% \pause
+%     \item If such an estimator exists, what is it? If several exist, which is the best?
+% \end{enumerate}
+% \end{frame}
 
 \begin{frame}{Characterization of Functionals}
 
   \begin{theorem}
-With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
+(\cite{halmos1946theory}) With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
 \begin{align}\label{unbiased_est}
     \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
 \end{align}
@@ -166,7 +166,7 @@ U-statistics were first coined by Hoeffding (\cite{hoeffding1948}) and are named
 \begin{Def}
 Statistics that have the form
         \begin{align}\label{u_stat}
-        \hat{\theta} = {n \choose k}^{-1} \sum_{(n,k)} \psi^{[k]}(X_{i_1}, \dotsc, X_{i_k})
+        \hat{\theta} = {n \choose k}^{-1} \sum_{(n,k)} \psi(X_{i_1}, \dotsc, X_{i_k})
     \end{align} 
 have desirable properties as estimators of regular functionals. These statistics are known as \textit{U-statistics}. 
 \end{Def}
@@ -175,10 +175,10 @@ have desirable properties as estimators of regular functionals. These statistics
 \begin{ex}\textbf{Sample mean}
 Let $\mathcal{F}$ be the set of all distributions whose means exist, which includes sets $\mathcal{F}$ that contain all distributions that have finite support on $\R$. The mean functional is given by $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. Using Equation \ref{u_stat}, we have that $k=1$ and $\psi(X_{i_1}) = x_{i_1}$, which gives $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 \end{ex}
-\pause
-\begin{ex}\textbf{Sample variance}
-Let $\mathcal{F}$ be the set of all distributions with finite second moment, i.e. $\mathcal{F} = \{F: \int |x|^2 dF(x)<\infty\}$. The variance functional is given by $\theta(F) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{2}(x_1 - x_2)^2 dF(x_1)dF(x_2)$. Here, we have that $k=2$ and $\psi(X_{i_1}, X_{i_2}) = \frac{1}{2}(x_{i_1} - x_{i_2})^2$, which gives $s_n^2 = {n \choose 2}^{-1}\sum_{1 \leq i < j \leq n}\frac{1}{2}(X_i - X_j)^2$.
-\end{ex}
+% \pause
+% \begin{ex}\textbf{Sample variance}
+% Let $\mathcal{F}$ be the set of all distributions with finite second moment, i.e. $\mathcal{F} = \{F: \int |x|^2 dF(x)<\infty\}$. The variance functional is given by $\theta(F) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{2}(x_1 - x_2)^2 dF(x_1)dF(x_2)$. Here, we have that $k=2$ and $\psi(X_{i_1}, X_{i_2}) = \frac{1}{2}(x_{i_1} - x_{i_2})^2$, which gives $s_n^2 = {n \choose 2}^{-1}\sum_{1 \leq i < j \leq n}\frac{1}{2}(X_i - X_j)^2$.
+% \end{ex}
 \end{frame}
 
 \begin{frame}{Examples}
@@ -258,7 +258,7 @@ Consider two U-statistics $U_n^{(1)}$ and $U_n^{(2)}$ that are based on the same
 \end{frame}
 
 \begin{frame}{H-decomposition}
-U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, 2$ that has variances of decreasing order in $n$ (\cite{hoeffding1961strong}). 
+U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, k$  (\cite{hoeffding1961strong}). 
 
 \begin{Def}
 We have kernels $h^{(1)}, \dotsc, h^{(k)}$ of degrees $1, \dotsc, k$ that are defined recursively:
@@ -293,8 +293,8 @@ Then,
 \begin{fontsize}{10}{12}
 \begin{align*}
     U_n &= {n \choose k}^{-1}\sum_{(n,k)}\psi(x_{i_1}, \dotsc, x_{i_k}) = {n \choose k}^{-1}\sum_{(n,k)}\left[\sum_{j=1}^kS_j\{i_1, \dotsc, i_k\} + \theta \right] \\
-    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) \\
-    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{k \choose j}H_n^{(j)}
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^k{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) \\
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^k{k \choose j}H_n^{(j)}
 \end{align*}
 \end{fontsize}
 \end{proof}    
@@ -328,7 +328,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \end{frame}
 \begin{frame}{Comparison to our CLT}
 \end{frame}
-\section{U-Statistics as Martingales}
+\section{U-statistics as Martingales}
 \begin{frame}{U-Statistics as Martingales}
 \end{frame}
 \section{Strong Law of Large Numbers}
