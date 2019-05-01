@@ -380,11 +380,22 @@ For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $
        \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
        &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
     \end{align*}
+    The term inside the braces is zero except when $j = d$; hence we get 
+    \begin{align*}
+        \delta_d^2 = \sum_{c = 1}^d (-1)^{b-c} {d \choose c} \sigma_{c}^2
+    \end{align*}
+    The reason we care about $\delta_d^2$ is because if a U-statistics is degenerate of order $d$, i.e., if $0 = \sigma_1^2 = \cdots \sigma_d^2 < \sigma_{d+1}^2$, then the first $d$ terms of the H-decomposition vanish, since in this case $\delta_1^2 = \cdots = \delta_d^2 = 0.$ When we discuss asymptotic of U-statistics later on, we'd see that the order of degeneracy determines the asymptotic distribution of the U-statistics.  
+    
+    
     
     \section{Asymptotics} 
     \begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
     \end{theorem}
+    
+    \begin{proof}
+    
+    \end{proof}
     
     \begin{theorem}[we may not need this]
     Let $U_n^{(j)}$, $j = 1, \cdots, m$ be U-statistics having expectation $\theta_j$ and kernels $\phi^{(j)}$ of degrees $k_j$. Also let $\Sigma = (\sigma_{i,j})$ where 
