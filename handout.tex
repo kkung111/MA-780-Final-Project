@@ -72,7 +72,7 @@ May 2, 2019
 Throughout this semester in Probability Theory II, we have learned many concepts such as Law of Large Numbers, Central Limit Theorem, and Martingales. U-Statistics is an example from Statistics where many of the Probability concepts can be applied to. We begin the discussion of U-Statistics with some background information.
 
 \section{Introduction}
-Before introducing the concept of U-Statistics, we will first define terms and set notation that will be used throughout this handout. 
+Before introducing the concept of U-Statistics, we will first define terms and introduce notation that will be used throughout this handout. 
 \begin{Def}{}
 We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of distribution functions on $\R$, i.e. $\theta = \theta(F), F \in \mathcal{F}$.
 \end{Def}
@@ -81,7 +81,7 @@ We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of di
 For every sufficiently large $n$, we say that $\theta$ \text{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
 \end{Def}
 
-In 1946, Paul Halmos asked two questions that prompted the study of U-Statistics:
+In 1946, Paul Halmos (\cite{halmos1946theory,}) asked two questions that prompted the study of U-Statistics:
 \begin{enumerate}
     \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
     \item If such an estimator exists, what is it? If several exist, which is the best?
@@ -100,7 +100,7 @@ Note that for $n \geq k$, if we let $f_n(X_1, \dotsc, X_n) = \psi(X_1, \dotsc, X
 \end{proof}
 
 \begin{Def}
-A functional $\theta(F)$ that satisfies Equation (2) for some function $\psi$ is called a \textit{regular statistical functional of degree k}. Also, the function $\psi$ is called the \textit{kernel} of the functional. 
+A functional $\theta(F)$ that satisfies Equation (2) for some function $\psi$ with $k$ variables is called a \textit{regular statistical functional of degree k}. Also, the function $\psi$ is called the \textit{kernel} of the functional. 
 \end{Def}
 
 In Theorem 1, the kernel function is only evaluated at $k$ random variables, but since we assume that we have independent identically distributed random variables $X_1, \dotsc, X_n$, it intuitively makes sense that we want a symmetric kernel function that is evaluated at all $n$ observations. 
@@ -133,9 +133,11 @@ Note that the kernel function $\psi(x_1, \dotsc, x_k)$ may not be symmetric, and
    \begin{proof}
     Define $f^{[n]}(x_1, \dotsc, x_n) = \frac{1}{n!}\sum_{(n)}f(x_{i_1}, \dotsc, x_{i_n})$ where the sum $\sum_{(n)}$ is taken over all permutations $(i_1, \dotsc, i_n)$ of $\{1, \dotsc, n\}$. Then $f^{[n]}$ is a symmetric unbiased estimator, and so by Theorem \ref{unique} agrees with $\psi^{[n]}$ on $\R$. Since both estimators are unbiased, we just have to show the inequality using second moments. Using the Cauchy-Schwartz Inequality gives $(\psi^{[n]})^2 \leq \frac{1}{n!}\sum_{(n)}f^2(x_{i_1}, \dotsc, x_{i_n})$. Then, taking the expected value of the inequality gives $E((\psi^{[n]})^2) \leq E(f^2(x_{i_1}, \dotsc, x_{i_n}))$. This implies that $var(f) \geq var(\psi^{[n]})$.
     \end{proof}
-    
+ 
+ There is an equivalent theorem with results similar to Theorem 2 and Theorem 3 for when $\mathcal{F}$ contains distribution functions containing all absolutely continuous distribution functions. 
+ 
     \section{U-Statistics}
-    U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948. U-statistics are of the form 
+    U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948 (\cite{hoeffding1948}). U-statistics are of the form 
     \begin{align}\label{u_stat}
         U_n = {n \choose k}^{-1}\sum_{(n,k)}\psi(X_{i_1}, \dotsc, X_{i_k})
     \end{align}
@@ -162,7 +164,7 @@ In the case of i.i.d random variables, we can express the variance of U-statisti
 
 \begin{Def}
 Given $c = 1, \dotsc, k$, we denote \begin{align}
-    \psi_c(x_1, \dotsc, x_c) = E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc X_k))
+    \psi_c(x_1, \dotsc, x_c) = E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc X_k)) = E(\psi(X_1, \dotsc, X_k)|X_1 = x_1, \dotsc, X_c = x_c)
 \end{align}
 as the \textit{conditional expectation}. We also denote the variance of the conditional expectation as 
 \begin{align}
@@ -170,7 +172,6 @@ as the \textit{conditional expectation}. We also denote the variance of the cond
 \end{align}
 where $\sigma_0^2 = 0$. 
 \end{Def}
-The conditional expectation has a useful theorem. 
 
 \begin{theorem}\label{cond_exp}
 The functions $\psi_c$ defined above have the properties
@@ -180,8 +181,23 @@ The functions $\psi_c$ defined above have the properties
         \end{enumerate}
 \end{theorem}
 \begin{proof}
-To prove Theorem 4, we rely on the Tower Property. Part (i) is given by \begin{align*}
- E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)) = E(E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d|X_1, \dotsc, X_d))|x_1, \dotsc, x_c)  = E(\psi(x_1, \dotsc, x_d)|x_1, \dotsc, x_c)  
+To prove Theorem 4, we rely on the Tower Property. Part (i) is given by 
+\begin{align*}
+ E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)) &= E(E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_d)|x_1, \dotsc, x_c)  \\
+ &= E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_c)  &&\text{[since $c<d$]}\\
+ &=\psi_c(x_1, \dotsc, x_c)
+\end{align*}
+
+Part (ii) is also given be the Tower Property, where we have 
+\begin{align*}
+    E(\psi_c(x_1, \dotsc, x_c)) &= E(E(\psi(X_1, \dotsc, X_k|x_1, \dotsc, x_c)) = E(\psi(X_1, \dotsc, X_k)
 \end{align*}
 \end{proof}
+
+\begin{theorem}
+We can express the variance of the conditional expectation as \begin{align}
+    \sigma_c^2 = cov(\psi(S_1), \psi(S_2))
+\end{align}
+where $S_1, S_2$ are two subsets of size $k$ from $\{1, \dotsc, n\}$ with $c$ elements in common. 
+\end{theorem}
 \end{document}
