@@ -374,6 +374,13 @@ For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $
         &= \sum_{j = 1}^c {c \choose j} \delta_j^2.
     \end{align*}
     
+    By using binomial coefficients, we could try to invert the last expression. Multiply both sides of the equation above by  $(-1)^{d-c} {d \choose c}$, and taking the sum from $c = 1$ to $d$ gives us
+    \begin{align*}
+        \sum_{c=1}^d {d \choose c} (-1)^{d-c} \sigma_{c}^2 &= \sum_{c=1}^d  
+       \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
+       &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
+    \end{align*}
+    
     \section{Asymptotics} 
     \begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
