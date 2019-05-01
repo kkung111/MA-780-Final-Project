@@ -322,11 +322,123 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \end{Rmk}    
 \end{frame}
 
+\begin{frame}{H-decomposition}
+The variances of the conditional expectations of $h^{(j)}$ are all zero, except the j-th. We define 
+    \begin{align}
+        \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
+    \end{align}
+    
+    Then, we have that 
+    \begin{align}
+        var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
+    \end{align}
+\end{frame}
+
+\begin{frame}{H-decomposition}
+     Some properties of $h^{(j)}$ include
+    \begin{theorem}
+    \begin{itemize}
+        \item For $c = 1, \dotsc, j-1$ and $j = 1, \dotsc, k$, $h_c^{(j)}(x_1, \dotsc, x_c) = 0$
+        \item $E(h^{(j)}(X_1, \dotsc, X_j)) = 0$
+    \end{itemize}
+    \end{theorem}
+    
+   The variances of the conditional expectations of $h^{(j)}$ are all zero, except the j-th. We define 
+    \begin{align}
+        \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
+    \end{align}
+    \begin{align}
+        var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
+         \end{align}
+    \end{frame} 
+    
+    \begin{frame}{H-decomposition}
+        
+        \begin{theorem}
+    \begin{itemize}
+        \item Let $j <j'$ and let $S_1$ and $S_2$ be a j-subset of $\{1, \dotsc, n\}$ and a j'-subset of $\{1, \dotsc, n\}$, respectively. Then, $cov(h^{(j)}(S_1), h^{(j')}(S_2)) = 0$ and so $cov(H_n^{(j)}, H_n^{(j')}) = 0$
+        \item Let $S_1 \neq S_2$ be two distinct j-subsets of $\{1, \dotsc, n\}$. Then, $cov(h^{(j)}(S_1), h^{(j)}(S_2)) = 0$
+    \end{itemize}
+    \end{theorem}
+    \end{frame}
+    
+    
+\begin{frame}{H-decomposition}
+    \begin{theorem}
+    The variance of $U_n$ is given by 
+    \begin{align}
+        var(U_n) = \sum_{j=1}^k {k \choose j}^2 {n \choose j}^{-1}\delta_j^2
+    \end{align}
+    \end{theorem}
+    Relations describing $\sigma_{c}^2$ in terms of the $\delta_j^2 $ and vice versa can be derived as follows: from the definition of H-decomposition, we have 
+    \begin{align*}
+        \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{c,j} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
+    \end{align*}
+    \end{frame}
+    
+    \begin{frame}{H-decomposition}
+    Take variance of both sides,  we get 
+    \begin{align*}
+        \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} \\
+        &= \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) \\ 
+        &= \sum_{j = 1}^c {c \choose j} \delta_j^2.
+    \end{align*}
+
+    \begin{align*}
+        \sum_{c=1}^d {d \choose c} (-1)^{d-c} \sigma_{c}^2 &= \sum_{c=1}^d  
+       \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
+       &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
+    \end{align*}
+    \end{frame}
+    
+    \begin{frame}{H-decomposition}
+    The term inside the braces is zero except when $j = d$; hence we get 
+    \begin{align*}
+        \delta_d^2 = \sum_{c = 1}^d (-1)^{b-c} {d \choose c} \sigma_{c}^2
+    \end{align*}
+    
+    \end{frame}
+    
+
 \section{Central Limit Theorem}
 \begin{frame}{CLT}
+    \begin{theorem}
+    Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
+    \end{theorem}
+    
+    \begin{proof}
+    
+    \end{proof}
 \end{frame}
-\begin{frame}{Comparison to our CLT}
-\end{frame}
+
+
+\begin{frame}{CLT of U-statistics for Independent r.v.s}
+\begin{theorem}
+    Let $X_1, X_2, \cdots,$ be independent r.v.s with distribution functions $F_1, F_2, \cdots$. Define for $i = 1,2, \cdots, n$
+    \begin{align}
+        \phi_{1,i} (x) = {n-1 \choose k-1}^{-1} \sum_{(n-1, k-1)}^{(-i)} \phi_{1, i; i_2, \cdots, i_k}(x)
+    \end{align}
+    where the sum is taken over all $(k-1)$-subsets $\{i_2, \cdots, i_k\}$ of $\{1,2, \cdots, n\}$ that do not contain $i$, and 
+    \begin{align}
+        \phi_{1, i; i_2, \cdots, i_k}(x) = E \phi(x, X_{i2}, \cdots, X_{i_k}) - \theta(i, i_2, \cdots, i_k).
+    \end{align}
+    \end{theorem}
+    \end{frame}
+    
+    \begin{frame}{CLT for U-statistics for Independent r.v.s cont.}
+    \begin{theorem}
+    Suppose that 
+    \begin{enumerate}[label = (\roman*)]
+        \item $Var \phi(X_{i_1}, \cdots, X_{i_k} ) < A$ for some constant $A$ and all $i_1, \cdots, i_k$;
+        \item For some $\delta > 0, E|\phi_{1, i} (X_i) |^{2 + \delta} < \infty$ for all $i$, and 
+        \begin{align}
+            \lim_{n \rightarrow \infty} \sum_{i =1}^{n} E|\phi_{1, i} (X_i) |^{2 + \delta} \Big/ (\sum_{i =1}^{n} E|\phi_{1, i} (X_i)^2 |) ^{(2 + \delta)/2} = 0
+        \end{align}
+       Then $(U_n - E(U_n)) / (Var U_n)^{\frac{1}{2}} \xrightarrow{\mathcal{D}} N(0,1).$ 
+    \end{enumerate}
+    \end{theorem}
+  \end{frame}
+
 \section{U-Statistics as Martingales}
 \begin{frame}{U-Statistics as Martingales}
 \end{frame}
