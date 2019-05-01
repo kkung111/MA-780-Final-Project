@@ -1,4 +1,5 @@
-\documentclass{beamer}
+%\documentclass{beamer}
+\documentclass[handout]{beamer}
 
 % For more themes, color themes and font themes, see:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
@@ -248,7 +249,7 @@ Let $U_n$ be a U-statistic with kernel $\psi$ of degree k. Then,
 \pause 
 Consider two U-statistics $U_n^{(1)}$ and $U_n^{(2)}$ that are based on the same sample $X_1, \dotsc, X_n$, but they have different kernel functions, $\psi$ and $\phi$ of degrees $k_1$ and $k_2$, respectively. Assume that WLOG, $k_1 \leq k_2$. 
     \begin{theorem}
-    Let $U_n^{(1)}$ and $U_n^{(1)}$ be defined as above. Then, 
+    Let $U_n^{(1)}$ and $U_n^{(2)}$ be defined as above. Then, 
     \begin{align}
         cov(U_n^{(1)}, U_n^{(2)}) = {n \choose k_1}^{-1}\sum_{c=1}^{k_1}{k_2 \choose c}{n-k_2 \choose k_1 - c}\sigma_{c,c}^2
         \end{align}
