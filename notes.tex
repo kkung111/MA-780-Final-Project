@@ -364,15 +364,15 @@ For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $
     \end{proof}
     \end{itemize}
     Relations describing $\sigma_{c}^2$ in terms of the $\delta_j^2 $ and vice versa can be derived as follows: from the definition of H-decomposition, we have 
-    \begin{align}
+    \begin{align*}
         \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{c,j} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
-    \end{align}
+    \end{align*}
     thus take variance of both sides, we get 
-    \begin{align}
+    \begin{align*}
         \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} \\
         &= \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) \\ 
         &= \sum_{j = 1}^c {c \choose j} \delta_j^2.
-    \end{align}
+    \end{align*}
     
     \section{Asymptotics} 
     \begin{theorem}
@@ -381,9 +381,9 @@ For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $
     
     \begin{theorem}[we may not need this]
     Let $U_n^{(j)}$, $j = 1, \cdots, m$ be U-statistics having expectation $\theta_j$ and kernels $\phi^{(j)}$ of degrees $k_j$. Also let $\Sigma = (\sigma_{i,j})$ where 
-    \begin{align}
+    \begin{align*}
         \sigma_{i,j} = k_i k_j Cov(\phi^{(i)} (X_1, \cdots, X_{k_i}), \phi^{(j)} (X_{k_i}, \cdots, X_{k_i + k_j -1})),
-    \end{align}
+    \end{align*}
     and denote by $U_n$ and $\theta$ the m-vectors $(U_n^{(1)}, \cdots, U_n^{(m)})$ and $(\theta_1, \cdots, \theta_m)$ respectively. Then $n^{\frac{1}{2}}(U_n - \theta)$ converges in distribution to a multivariate normal distribution with mean vector zero and covariance matrix $\Sigma$.
     \end{theorem}
     
@@ -398,7 +398,7 @@ For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $
         \phi_{1, i; i_2, \cdots, i_k}(x) = E \phi(x, X_{i2}, \cdots, X_{i_k}) - \theta(i, i_2, \cdots, i_k).
     \end{align}
     Suppose that 
-    \begin{enumerate}[i]
+    \begin{enumerate}[label = (\roman*)]
         \item $Var \phi(X_{i_1}, \cdots, X_{i_k} ) < A$ for some constant $A$ and all $i_1, \cdots, i_k$;
         \item For some $\delta > 0, E|\phi_{1, i} (X_i) |^{2 + \delta} < \infty$ for all $i$, and 
         \begin{align}
