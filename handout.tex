@@ -134,7 +134,9 @@ Note that the kernel function $\psi(x_1, \dotsc, x_k)$ may not be symmetric, and
     Define $f^{[n]}(x_1, \dotsc, x_n) = \frac{1}{n!}\sum_{(n)}f(x_{i_1}, \dotsc, x_{i_n})$ where the sum $\sum_{(n)}$ is taken over all permutations $(i_1, \dotsc, i_n)$ of $\{1, \dotsc, n\}$. Then $f^{[n]}$ is a symmetric unbiased estimator, and so by Theorem \ref{unique} agrees with $\psi^{[n]}$ on $\R$. Since both estimators are unbiased, we just have to show the inequality using second moments. Using the Cauchy-Schwartz Inequality gives $(\psi^{[n]})^2 \leq \frac{1}{n!}\sum_{(n)}f^2(x_{i_1}, \dotsc, x_{i_n})$. Then, taking the expected value of the inequality gives $E((\psi^{[n]})^2) \leq E(f^2(x_{i_1}, \dotsc, x_{i_n}))$. This implies that $var(f) \geq var(\psi^{[n]})$.
     \end{proof}
  
+ \begin{Rmk}
  There is an equivalent theorem with results similar to Theorem 2 and Theorem 3 for when $\mathcal{F}$ contains distribution functions containing all absolutely continuous distribution functions. 
+ \end{Rmk}
  
     \section{U-Statistics}
     U-statistics are named due to their unbiasedness property, and the name was coined by Hoeffding in 1948 (\cite{hoeffding1948}). U-statistics are of the form 
@@ -181,7 +183,7 @@ The functions $\psi_c$ defined above have the properties
         \end{enumerate}
 \end{theorem}
 \begin{proof}
-To prove Theorem 4, we rely on the Tower Property. Part (i) is given by 
+To prove Theorem \ref{cond_exp}, we rely on the Tower Property. Part (i) is given by 
 \begin{align*}
  E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)) &= E(E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_d)|x_1, \dotsc, x_c)  \\
  &= E(\psi(X_1, \dotsc, X_k)|x_1, \dotsc, x_c)  &&\text{[since $c<d$]}\\
@@ -194,10 +196,117 @@ Part (ii) is also given be the Tower Property, where we have
 \end{align*}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{cond_exp_prop}
 We can express the variance of the conditional expectation as \begin{align}
     \sigma_c^2 = cov(\psi(S_1), \psi(S_2))
 \end{align}
 where $S_1, S_2$ are two subsets of size $k$ from $\{1, \dotsc, n\}$ with $c$ elements in common. 
 \end{theorem}
+
+\begin{proof}
+By Theorem \ref{cond_exp} part (ii), we know that $E(\psi_c(X_1, \dotsc, X_c)) = E(\psi(X_1, \dotsc, X_k))$, so we just have to show $E(\psi(X_1, \dotsc, X_k)\psi(X_1, \dotsc, X_c, X_{k+1}, \dotsc, X_{2k-c})) = E\left[(\psi_c(X_1, \dotsc, X_c))^2\right]$. We thus have the following:
+\begin{fontsize}{8}{12}
+\begin{align*}
+    E(\psi(X_1, \dotsc, X_k)\psi(X_1, \dotsc, X_c, X_{k+1}, \dotsc, X_{2k-c}))&= E\left[E(\psi(X_1, \dotsc, X_k)\psi(X_1, \dotsc, X_c, X_{k+1}, \dotsc, X_{2k-c})|X_1, \dotsc, X_c)\right]\\
+    &=E\left[E(\psi(X_1, \dotsc, X_k)|X_1, \dotsc, X_c) E(\psi(X_1, \dotsc, X_c, X_{k+1}, \dotsc, X_{2k-c})|X_1, \dotsc, X_c)\right]\\
+    &=E\left[\psi_c(X_1, \dotsc, X_c)^2\right]
+\end{align*}
+\end{fontsize}Thus, we have $cov(\psi(S_1)\psi(S_2)) = E\left[\psi_c(X_1, \dotsc, X_c)^2\right] - E\left[\psi_c(X_1, \dotsc, X_c)\right]^2 = \sigma_c^2$.
+\end{proof}
+
+Using the results from Theorem \ref{cond_exp_prop}, we can derive the variance for the U-statistic.
+
+\begin{theorem}\label{var_u_stat}
+Let $U_n$ be a U-statistic with kernel $\psi$ of degree k. Then, 
+\begin{align}
+    var(U_n) = {n \choose k}^{-1}\sum_{c=1}^k{k \choose c}{n-k \choose k-c} \sigma_c^2
+\end{align}
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+        var(U_n) &= var({n \choose k}^{-1} \sum_{(n,k)}\psi(X_{i_1}, \dotsc, X_{i_n})) = cov({n \choose k}^{-1} \sum_{(n,k)}\psi(X_{i_1}, \dotsc, X_{i_n}), {n \choose k}^{-1} \sum_{(n,k)}\psi(X_{j_1}, \dotsc, X_{j_n}))\\
+        &= {n \choose k}^{-2}\sum_{(n,k)}\sum_{(n,k)}cov(\psi(X_{i_1}, \dotsc, X_{i_n}), \psi(X_{j_1}, \dotsc, X_{j_n})) ={n \choose k}^{-1}\sum_{c=1}^k {k \choose c}{n-k \choose k-c}\sigma_c^2
+    \end{align*}
+by using the results in Theorem \ref{cond_exp_prop}. The coefficients come from counting the number of ways of choosing two subsets of size $k$ with $c$ elements in common. 
+\end{proof}
+
+\subsection{Covariance of U-statistics}
+Suppose now we have two U-statistics $U_n^{(1)}$ and $U_n^{(2)}$ where they are based on the same sample $X_1, \dotsc, X_n$, but they have different kernel functions, $\psi$ and $\phi$ of degrees $k_1$ and $k_2$, respectively. Assume that WLOG, $k_1 \leq k_2$. 
+
+We first define $\sigma_{c,d}^2 = cov(\psi_c(X_1, \dotsc, X_c), \phi_d(X_1, \dotsc, X_d)$. Using this, we can define the covariance of U-statistics. 
+\begin{theorem}
+Suppose that $c \leq d$. If $S_1$ is in $S_{n,k_1}$ and $S_2$ in $S_{n, k_2}$ with $|S_1 \cap S_2| = c$, then 
+    \begin{align}
+    \sigma_{c,d}^2 = cov(\psi(S_1), \phi(S_2))
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    The proof is very similar to that of the Theorem \ref{cond_exp_prop} and uses the result from Theorem \ref{cond_exp}. However, in the product term, we condition on $d$ terms instead of $c$ terms. 
+\end{proof}
+
+\begin{Rmk}
+ As a consequence, we have $\sigma_{c,c}^2 = \sigma_{c,c+1}^2 = \dotsc = \sigma_{c,k_2}^2$ for $c = 1, \dotsc, k_1$.    
+\end{Rmk}
+    
+    \begin{theorem}
+    Let $U_n^{(1)}$ and $U_n^{(1)}$ be defined as above. Then, 
+    \begin{align}
+        cov(U_n^{(1)}, U_n^{(2)}) = {n \choose k_1}^{-1}\sum_{c=1}^{k_1}{k_2 \choose c}{n-k_2 \choose k_1 - c}\sigma_{c,c}^2
+        \end{align}
+    \end{theorem}
+    \begin{proof}
+    \begin{align*}
+      cov(U_n^{(1)}, U_n^{(2)}) &= {n \choose k_1}^{-1}{n \choose k_2}^{-1}\sum_{(n,k_1)}\sum_{(n, k_2)} cov(\psi(S_1), \phi(S_2)) = {n \choose k_1}^{-1}{n \choose k_2}^{-1}\sum_{c=1}^{k_1}\sum_{|S_1 \cap S_2| = c} cov(\psi(S_1), \phi(S_2)) \\
+      &= {n \choose k_1}^{-1}\sum_{c=1}^{k_1}{k_2 \choose c}{n-k_2 \choose k_1 - c}\sigma_{c,c}^2
+    \end{align*}
+since there are ${n \choose k_2}{k_2 \choose c}{n-k_2 \choose k_1 - c}$ ways to choose two subsets $S_1, S_2$ with $k_1$ and $k_2$ elements from the sample, where $|S_1 \cap S_2| = c$.
+    \end{proof}
+    
+\subsection{H-Decomposition}
+U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, 2$ that has variances of decreasing order in $n$ (\cite{hoeffding1961strong}). Using this decomposition, it is easier to prove some of the  results discussed later on in this handout. 
+
+We first introduce kernels $h^{(1)}, \dotsc, h^{(k)}$ of degrees $1, \dotsc, k$ that are defined recursively: 
+\begin{align}
+    h^{(1)}(x_1) &= \psi_1(x_1) - \theta \notag \\
+    h^{(c)}(x_1, \dotsc, x_c) &= \psi_c(x_1, \dotsc, x_c) - \sum_{j=1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1}, \dotsc, x_{i_j}) - \theta \label{h_recursive}
+\end{align}
+where $c = 2, \dotsc, k$.
+
+\begin{theorem}
+For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $h^{(j)}$, where \begin{align}
+H_n^{(j)} = {n \choose j}^{-1} \sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}). 
+\end{align}
+Then,
+\begin{align}
+    U_n  = \theta + \sum_{j=1}^k{k \choose j}H_n^{(j)}
+\end{align}
+\end{theorem}
+\begin{proof}
+First, let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which is summed over all $j$-subsets $\{\nu_1, \dotsc, \nu_j\}$ of $\{1, \dotsc, n\}$. Then, we have the relationship $\sum_{(n,k)}S_j\{i_1, \dotsc, i_k\} = {n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which holds due to the identity ${n-j \choose k-j}{n \choose j} = {n \choose k}{k \choose j} \implies {n \choose k}^{-1}{n-j \choose k-j} = {k \choose j}{n \choose j}^{-1}$. We can then decompose $U_n$ as follows.
+\begin{align*}
+    U_n &= {n \choose k}^{-1}\sum_{(n,k)}\psi(x_{i_1}, \dotsc, x_{i_k}) = {n \choose k}^{-1}\sum_{(n,k)}\left[\sum_{j=1}^kS_j\{i_1, \dotsc, i_k\} + \theta \right] &&\text{[from Eq. \ref{h_recursive} with $c = k$]} \\
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) = \theta + {n \choose k}^{-1}\sum_{j=1}^n{k \choose j}H_n^{(j)}
+\end{align*}
+\end{proof}
+
+\begin{Rmk}
+We can also truncate the H-decomposition up to $c$ terms, and we are then left with a remainder term $R_n^{(c)}$, i.e. 
+\begin{align}
+    U_n = \theta + \sum_{j=1}^c{k \choose j} H_n^{(c)} + R_n^{(c)}
+\end{align}
+where $R_n^{(c)}$ is a U-statistic with kernel $\sum_{j=c+1}^k S_j\{1, \dotsc, k\}$.  
+\end{Rmk}
+
+\begin{Rmk}
+We can represent the functions $h^{(c)}$ in a slightly different manner. First, let $G_x$ denote the distribution function of a single point mass at $x$. Then, we have 
+\begin{align}
+    h^{(1)}(x_1) - \psi(x_1) - \theta  &= \int \dotsc \int \psi(x_1, u_2, \dotsc, d_k)\prod_{i=2}^k dF(u_i) - \int \dotsc \int \psi(u_1, u_2, \dotsc, d_k)\prod_{i=1}^k dF(u_i) \notag \\
+    &= \int \dotsc \int \psi(u_1, \dotsc, u_k)(dG_{x_1}(u_1) - dF(u_1))\prod_{i=2}^k dF(u_i) \notag \\
+    h^{(j)}(x_1, \dotsc, x_j) &= \int \dotsc \int \psi(u_1, \dotsc, u_k) \prod_{i=1}^j(dG_{x_i}(u_i) - dF(u_i))\prod_{j+1}^kdF(u_i) \label{h_func_rep}
+\end{align}
+Here, the relation in Equation \ref{h_func_rep} is derived by taking the product of $dG_{x_i}(u_i)$. In particular, we have $\prod_{i=1}^kdG_{x_i}(u_i) = \prod_{i=1}^k\left[(dG_{x_i}(u_i) - dF(u_i)) + dF(u_i) \right]$, which leads to $$\prod_{i=1}^kdG_{x_i}(u_i) = \sum_{c=0}^k \sum_{(k,c)}\prod_{j=1}^c\left(dG_{x_{i_j}}(u_{i_j}) - dF(u_{i_j})\right)\prod_{c+1}^k dF(u_{i'_j}).$$
+\end{Rmk}
+
 \end{document}
