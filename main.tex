@@ -10,6 +10,7 @@
   \usefonttheme{serif}    % or try default, structurebold, ...
   \setbeamertemplate{navigation symbols}{}
   \setbeamertemplate{caption}[numbered]
+  \setbeamertemplate{theorems}[numbered]
 } 
 
 \usepackage[english]{babel}
@@ -21,6 +22,7 @@
 \usepackage{verbatim}
 \usepackage{hyperref}
 \usepackage[backend=biber,style=authoryear]{biblatex}
+
 \addbibresource{ref.bib}
 % On Overleaf, these lines give you sharper preview images.
 % You might want to `comment them out before you export, though.
@@ -28,6 +30,26 @@
 \pgfpagesuselayout{resize to}[%
   physical paper width=8in, physical paper height=6in]
 
+%%%%%%%%%%new commands%%%%%%%%%%%%
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\nsum}{{\sum_{i=1}^n}}
+\newcommand{\E}{{\mathbb{E}}}
+\newcommand{\V}{{\text{Var}}}
+\newcommand{\prob}{{\mathbb{P}}}
+\newcommand{\bvar}[1]{\mathbf{#1}} 
+
+\theoremstyle{definition}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{Lemma}{Lemma}
+\newtheorem{Def}{Definition}
+\numberwithin{Def}{section}
+\newtheorem{ex}{Example}
+\newtheorem{Prop}{Proposition}
+\newtheorem{Cor}[theorem]{Corollary}
+\newtheorem{Rmk}{Remark}
 % Here's where the presentation starts, with the info for the title slide
 \title{U-Statistics}
 \author{Lily Chou, Kelly Kung, Zihuan Qiao}
@@ -47,82 +69,258 @@
 
 \section{Introduction}
 \begin{frame}{Background Information}
-    \begin{block}{Functional}
-    We define a functional, $\theta$, defined on a set $\mathcal{F}$ as 
-    \begin{align}
-        \theta = \theta(F), F \in \mathcal{F}
-    \end{align}
-    \end{block}
-    \begin{block}{Unbiasedness}
-    We say that a functional $\theta$ admits an unbiased estimator if for a sufficiently large sample of independent random variables $X_1, \dotsc, X_n$, there exists a function $f_n(X_1, \dotsc, X_n)$ such that 
-    \begin{align}\label{unbiased}
-        E(f_n(X_1, \dotsc, X_n)) = \theta(F), \forall F \in \mathcal{F}
-    \end{align}
-    \end{block}
+\begin{Def}{}
+We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of distribution functions on $\R$, i.e. $\theta = \theta(F), F \in \mathcal{F}$.
+\end{Def}
+
+\begin{Def}{}
+For every sufficiently large $n$, we say that $\theta$ \textit{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
+\end{Def}
 \end{frame}
 \begin{frame}{Background Information}
 The theory of U-statistics started with Paul Richard Halmos (\cite{halmos1946theory}) when he proposed two questions:
 \begin{enumerate}
-        \item Does there exist an estimator of $\theta = \theta(F)$ that is unbiased, no matter what $F$ is. Can we characterize the sets $\mathcal{F}$ and $\theta$ for which the answer is yes.
-        
-        \item What is this estimator? If several exist, which is the best estimator?
+\pause
+    \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
+\pause
+    \item If such an estimator exists, what is it? If several exist, which is the best?
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Characterization of Functionals with Unbiased Estimators}
+\begin{frame}{Characterization of Functionals}
 
   \begin{theorem}
-    A functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
-    \begin{align}\label{unbiased est}
-        \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
-    \end{align}
-    for all F in $\mathcal{F}$.
-    \end{theorem}
-    Here, $\theta$ is called a \textbf{regular statistical functional} of degree k and $\psi$ is called \textbf{the kernel} of the functional. 
+With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
+\begin{align}\label{unbiased_est}
+    \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
+\end{align}
+for all $F \in \mathcal{F}$.
+\end{theorem}
+    Here, $\theta$ is called a \textit{regular statistical functional of degree k} and $\psi$ is called \textit{the kernel} of the functional. 
  
 \end{frame}
 
-\begin{frame}{Definition}
-U-Statistics are first coined by Hoeffding (\cite{hoeffding1992class}) are named due to their unbiasedness
-\begin{block}{Definition:}
+\begin{frame}{Characterization of Sets $\mathcal{F}$}
+\begin{Def}
+A function is \textit{symmetric} if it is invariant under permutations of its arguments. 
+\end{Def}
+
+\pause
+\begin{Lemma}\label{lemA}
+Let $\mathcal{F}$ contain all distributions with finite support in E (some Borel set), and let $f$ be a symmetric function of n variables with 
+    \begin{align*}
+        \int \dotsc \int_{\R_n} f(x_1, \dotsc, x_n) \prod_{i=1}^n dF(x_i) = 0 \text{ for all } F \in \mathcal{F}
+    \end{align*}
+    Then $f(x_1, \dotsc, x_n) = 0$ whenever $x_i \in E, i = 1, \dotsc, n$. 
+\end{Lemma}
+\end{frame}
+
+\begin{frame}{Characterization of Sets $\mathcal{F}$}
+
+\begin{theorem}\label{unique}
+Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let $\theta$ be a regular functional satisfying Equation \ref{unbiased_est}. Then up to equality on $E$, there is a unique symmetric unbiased estimator of $\theta$.
+\end{theorem}
+\pause 
+\begin{proof}
+\begin{itemize}
+    \item Define a symmetric function $\psi^{[n]}(x_1, \dotsc, x_n) = \frac{(n-1)!}{n!}\sum \psi(x_{i_1}, \dotsc, x_{i_k})$.
+    \item $\psi^{[n]}$ is unbiased since the random variables are i.i.d and $\psi(x_{i_1}, \dotsc, x_{i_k})$ is a kernel function.
+
+    \item Consider another symmetric unbiased estimator $f$.
+
+    \item By Lemma \ref{lemA}, since $E(f - \psi^{[n]}) = 0$, we know $f - \psi^{[n]} = 0$, i.e. $f = \psi^{[n]}$.
+\end{itemize}   . 
+\end{proof}
+\end{frame}
+
+\begin{frame}{Characterization of ``Best'' Estimator}
+ \begin{theorem}
+    Suppose that $E = \R$. Let $\theta$ be a regular functional of degree k defined by Equation \ref{unbiased_est} on a set of $\mathcal{F}$ of distribution functions containing all distributions having finite support. Let $f$ be an unbiased estimate of $\theta$ based on a sample of size n, so that $f$ satisfies Equation \ref{unbiased}. Then $var(f) \geq var(\psi^{[n]})$ for all $F \in \mathcal{F}$. 
+    \end{theorem}
+
+    % \begin{proof}
+    % \begin{fontsize}{8.5}{12}
+    % \begin{itemize}
+    %     \item Define $f^{[n]}(x_1, \dotsc, x_n) = \frac{1}{n!}\sum_{(n)}f(x_{i_1}, \dotsc, x_{i_n})$ where the sum $\sum_{(n)}$ is taken over all permutations $(i_1, \dotsc, i_n)$ of $\{1, \dotsc, n\}$.
+
+    %     \item  $f^{[n]}$ is a symmetric unbiased estimator, and so by Theorem \ref{unique} agrees with $\psi^{[n]}$ on $\R$.
+    %     \pause
+    %     \item Use the Cauchy-Schwartz Inequality to show $(\psi^{[n]})^2 \leq \frac{1}{n!}\sum_{(n)}f^2(x_{i_1}, \dotsc, x_{i_n})$.
+
+    %     \item Take the expected value of the inequality to show $E((\psi^{[n]})^2) \leq E(f^2(x_{i_1}, \dotsc, x_{i_n}))$.
+    %     \pause
+    %     \item This implies that $var(f) \geq var(\psi^{[n]})$.
+    % \end{itemize}
+    % \end{fontsize}
+    % \end{proof} 
+  \pause   
+     \begin{Rmk}
+ There is an equivalent theorem for when $\mathcal{F}$ contains distribution functions containing all absolutely continuous distribution functions. 
+ \end{Rmk}
+\end{frame}
+
+\section{U-statistics}
+\begin{frame}{U-statistics}
+U-statistics were first coined by Hoeffding (\cite{hoeffding1948}) and are named due to their unbiasedness
+\begin{Def}
 Statistics that have the form
-        \begin{align}
+        \begin{align}\label{u_stat}
         \hat{\theta} = {n \choose k}^{-1} \sum_{(n,k)} \psi^{[k]}(X_{i_1}, \dotsc, X_{i_k})
     \end{align} 
-have desirable properties as estimators of regular functionals. These statistics are known as U-statistics. 
-\end{block}
+have desirable properties as estimators of regular functionals. These statistics are known as \textit{U-statistics}. 
+\end{Def}
 \end{frame}
 \begin{frame}{Examples}
-\begin{itemize}
-    \item \textbf{Sample Mean:} $\mathcal{F}$ is set of all distributions whose means exist, i.e. it contains all distributions having finite support on $\mathbb{R}$. The functional is $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. The U-statistic is $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$
-    \item \textbf{Sample Variance:} $\mathcal{F}$ is set of all distributions with finite second moment, i.e. $\mathcal{F} =\{F: \int|x|^2 dF(x)<\infty\}$. The variance functional is given as $var(F) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{2}(x_1 - x_2)^2dF(x_1)dF(x_2)$ which is estimated by $s_n^2 = {n \choose 2}^{-1}\sum_{1\leq i <j \leq n}\frac{1}{2}(X_i - X_j)^2$
-\end{itemize}
+\begin{ex}\textbf{Sample mean}
+Let $\mathcal{F}$ be the set of all distributions whose means exist, which includes sets $\mathcal{F}$ that contain all distributions that have finite support on $\R$. The mean functional is given by $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. Using Equation \ref{u_stat}, we have that $k=1$ and $\psi(X_{i_1}) = x_{i_1}$, which gives $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+\end{ex}
+\pause
+\begin{ex}\textbf{Sample variance}
+Let $\mathcal{F}$ be the set of all distributions with finite second moment, i.e. $\mathcal{F} = \{F: \int |x|^2 dF(x)<\infty\}$. The variance functional is given by $\theta(F) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{1}{2}(x_1 - x_2)^2 dF(x_1)dF(x_2)$. Here, we have that $k=2$ and $\psi(X_{i_1}, X_{i_2}) = \frac{1}{2}(x_{i_1} - x_{i_2})^2$, which gives $s_n^2 = {n \choose 2}^{-1}\sum_{1 \leq i < j \leq n}\frac{1}{2}(X_i - X_j)^2$.
+\end{ex}
 \end{frame}
-\begin{frame}{Properties}
-\begin{itemize}
-    \item For $c = 1, \dotsc, k$, let \begin{align}
-            \psi_c(x_1, \dotsc, x_c) = E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_k))
-        \end{align}
-        be the conditional expectations \begin{align}
-        \sigma_c^2 = var(\psi_c(X_1, \dotsc, X_c))
-        \end{align} 
-        be the variances of the conditional expectations.
-        Here, the conditional expectation is dependent on the first $c$ random variables. Also define $\sigma_0^2 = 0$. 
-        \item The variance of the U-statistics is given as 
-    \begin{theorem}
-    Let $U_n$ be a U-statistic with a kernel $\psi$ of degree k. Then, 
+
+\begin{frame}{Examples}
+\begin{ex}\textbf{Kendall's Tau} Here, we consider two points $P_1$ and $P_2$ on a plane. We say that $P_1$ and $P_2$ are \textit{concordant} if the line joining the points have positive slope, and otherwise, they are \textit{discordant}. Let $\mathcal{F}$ be the set of distribution functions with all absolutely continuous bivariate random vectors. The functional is $\tau = \mathbb{P}(P_1, P_2 \text{ concordant}) - \mathbb{P}(P_1, P_2 \text{ discordant})$. Define the kernel $t$ as 
+\begin{fontsize}{10}{12}
+\begin{align*}
+    t(P_1, P_2) = \begin{cases} 1 & \text{if $P_1$ and $P_2$ are concordant} \\ -1 & \text{if $P_1$ and $P_2$ are discordant} 
+    \end{cases} = sgn(X_1 - X_2)(Y_1 - Y_2).
+\end{align*}
+\end{fontsize}
+\noindent Here, we have $k=2$. Using Equation \ref{u_stat}, we have that the estimator of Kendall's tau is $\tau_n = {n \choose 2}\sum_{(n,2)}t(P_i, P_j)$.
+\end{ex}    
+\end{frame}
+
+\begin{frame}{Conditional Expectation}
+We first define the conditional expectation.
+\begin{Def}
+Given $c = 1, \dotsc, k$, we denote \begin{align}
+    \psi_c(x_1, \dotsc, x_c) &= E(\psi(x_1, \dotsc, x_c, X_{c+1}, \dotsc X_k)) \notag \\
+    &= E(\psi(X_1, \dotsc, X_k)|X_1 = x_1, \dotsc, X_c = x_c)
+\end{align}
+as the \textit{conditional expectation}. We also denote the variance of the conditional expectation as 
+\begin{align}
+    \sigma_c^2 = var(\psi_c(X_1, \dotsc, X_c))
+\end{align}
+where $\sigma_0^2 = 0$. 
+\end{Def}
+\end{frame}
+
+\begin{frame}{Conditional Expectation}
+\begin{theorem}\label{cond_exp}
+The functions $\psi_c$ defined above have the properties
+        \begin{itemize}
+            \item $\psi_c(x_1, \dotsc, x_c) = E(\psi_d(x_1, \dotsc, x_c, X_{c+1}, \dotsc, X_d)), \text{ for } 1 \leq c <d \leq k$
+            \item $E(\psi_c(X_1, \dotsc, X_c)) = E(\psi(X_1, \dotsc, X_k))$
+        \end{itemize}
+\end{theorem}
+
+\pause
+\begin{theorem}\label{cond_exp_prop}
+We can express the variance of the conditional expectation as \begin{align}
+    \sigma_c^2 = cov(\psi(S_1), \psi(S_2))
+\end{align}
+where $S_1, S_2$ are two subsets of size $k$ from $\{1, \dotsc, n\}$ with $c$ elements in common. 
+\end{theorem}
+\end{frame}
+
+\begin{frame}{Conditional Expectation}
+\begin{theorem}
+We first define $\sigma_{c,d}^2 = cov(\psi_c(X_1, \dotsc, X_c), \phi_d(X_1, \dotsc, X_d)$. Suppose that $c \leq d$ and $k_1 \leq k_2$. If $S_1$ is in $S_{n,k_1}$ and $S_2$ in $S_{n, k_2}$ with $|S_1 \cap S_2| = c$, then 
     \begin{align}
-        var(U_n) = {n \choose k}^{-1}\sum_{c=1}^k{k \choose c}{n-k \choose k-c} \sigma_c^2
+    \sigma_{c,d}^2 = cov(\psi(S_1), \phi(S_2))
     \end{align}
-    \end{theorem}
-    
+\end{theorem}
+\pause 
+\begin{Rmk}
+ As a consequence, we have $\sigma_{c,c}^2 = \sigma_{c,c+1}^2 = \dotsc = \sigma_{c,k_2}^2$ for $c = 1, \dotsc, k_1$.    
+\end{Rmk}
+\end{frame}
+
+\begin{frame}{Variance and Covariance of U-statistics}
+\begin{theorem}\label{var_u_stat}
+Let $U_n$ be a U-statistic with kernel $\psi$ of degree k. Then, 
+\begin{align}
+    var(U_n) = {n \choose k}^{-1}\sum_{c=1}^k{k \choose c}{n-k \choose k-c} \sigma_c^2
+\end{align}
+\end{theorem} 
+\pause 
+Consider two U-statistics $U_n^{(1)}$ and $U_n^{(2)}$ that are based on the same sample $X_1, \dotsc, X_n$, but they have different kernel functions, $\psi$ and $\phi$ of degrees $k_1$ and $k_2$, respectively. Assume that WLOG, $k_1 \leq k_2$. 
+    \begin{theorem}
+    Let $U_n^{(1)}$ and $U_n^{(1)}$ be defined as above. Then, 
+    \begin{align}
+        cov(U_n^{(1)}, U_n^{(2)}) = {n \choose k_1}^{-1}\sum_{c=1}^{k_1}{k_2 \choose c}{n-k_2 \choose k_1 - c}\sigma_{c,c}^2
+        \end{align}
+    \end{theorem}  
+
+\end{frame}
+
+\begin{frame}{H-decomposition}
+U-statistics of degree $k$ can be decomposed in terms of a sum of uncorrelated U-statistics of degree $1, 2, \dotsc, 2$ that has variances of decreasing order in $n$ (\cite{hoeffding1961strong}). 
+
+\begin{Def}
+We have kernels $h^{(1)}, \dotsc, h^{(k)}$ of degrees $1, \dotsc, k$ that are defined recursively:
+\begin{align}
+    h^{(1)}(x_1) &= \psi_1(x_1) - \theta \notag \\
+    &\dotsc \notag \\
+    h^{(c)}(x_1, \dotsc, x_c) &= \psi_c(x_1, \dotsc, x_c) - \sum_{j=1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1}, \dotsc, x_{i_j}) - \theta \label{h_recursive}
+\end{align}
+where $c = 2, \dotsc, k$. 
+\end{Def}
+\end{frame}
+
+\begin{frame}{H-decomposition}
+ \begin{theorem}
+For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $h^{(j)}$, where \begin{align}
+H_n^{(j)} = {n \choose j}^{-1} \sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}). 
+\end{align}
+Then,
+\begin{align}
+    U_n  = \theta + \sum_{j=1}^k{k \choose j}H_n^{(j)}
+\end{align}
+\end{theorem}   
+\end{frame}
+
+\begin{frame}{H-decomposition}
+\begin{proof}
+\begin{itemize}
+    \item Let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum_{(n,j)} h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$. 
+    \item We have $\sum_{(n,k)}S_j\{i_1, \dotsc, i_k\} = {n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$ 
+    \item  ${n-j \choose k-j}{n \choose j} = {n \choose k}{k \choose j} \implies {n \choose k}^{-1}{n-j \choose k-j} = {k \choose j}{n \choose j}^{-1}$
 \end{itemize}
+\begin{fontsize}{10}{12}
+\begin{align*}
+    U_n &= {n \choose k}^{-1}\sum_{(n,k)}\psi(x_{i_1}, \dotsc, x_{i_k}) = {n \choose k}^{-1}\sum_{(n,k)}\left[\sum_{j=1}^kS_j\{i_1, \dotsc, i_k\} + \theta \right] \\
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) \\
+    &= \theta + {n \choose k}^{-1}\sum_{j=1}^n{k \choose j}H_n^{(j)}
+\end{align*}
+\end{fontsize}
+\end{proof}    
 \end{frame}
 
-\begin{frame}{Properties (continued)}
-
+\begin{frame}{H-decomposition}
+\begin{Rmk}
+We can also truncate the H-decomposition up to $c$ terms 
+\begin{align}
+    U_n = \theta + \sum_{j=1}^c{k \choose j} H_n^{(c)} + R_n^{(c)}
+\end{align}
+where $R_n^{(c)}$ is a U-statistic with kernel $\sum_{j=c+1}^k S_j\{1, \dotsc, k\}$.  
+\end{Rmk}
 \end{frame}
 
+\begin{frame}{H-decomposition}
+\begin{Rmk}
+We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the distribution function of a single point mass at $x$. 
+\begin{fontsize}{6.5}{12}
+\begin{align}
+    h^{(1)}(x_1) - \psi(x_1) - \theta  &= \int \dotsc \int \psi(x_1, u_2, \dotsc, d_k)\prod_{i=2}^k dF(u_i) - \int \dotsc \int \psi(u_1, u_2, \dotsc, d_k)\prod_{i=1}^k dF(u_i) \notag \\
+    &= \int \dotsc \int \psi(u_1, \dotsc, u_k)(dG_{x_1}(u_1) - dF(u_1))\prod_{i=2}^k dF(u_i) \notag \\
+    h^{(j)}(x_1, \dotsc, x_j) &= \int \dotsc \int \psi(u_1, \dotsc, u_k) \prod_{i=1}^j(dG_{x_i}(u_i) - dF(u_i))\prod_{j+1}^kdF(u_i) \label{h_func_rep}
+\end{align}
+\end{fontsize}
+\end{Rmk}    
+\end{frame}
 
 \section{Central Limit Theorem}
 \begin{frame}{CLT}
