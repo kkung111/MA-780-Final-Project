@@ -395,7 +395,7 @@ The variance of $U_n$ is given by
 
 \section{Central Limit Theorem}
 \begin{frame}{CLT for i.i.d case}
-\begin{fontsize}{7}{12}  
+\begin{fontsize}{7.5}{12}  
 \begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $\sqrt{n}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
     \end{theorem}
@@ -409,7 +409,9 @@ The variance of $U_n$ is given by
           = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n.
           \end{align*}
       Note that $\sum_{i = 1}^{n} h^{(1)}(x_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (x_i) ) = 0$$
-      by Theorem 10 (ii). 
+      by Theorem 10 (ii). \\
+      $\phantom{+}$\\
+      $\phantom{+}$\\
       \end{proof}
       \end{fontsize}
       \end{frame}
@@ -504,7 +506,7 @@ Since $\psi_1(x_1)$ is integrable by law of total expectation and the assumption
 
 \begin{frame}{Proof cont'd}
 \begin{proof}
-\begin{fontsize}{9}{12}
+\begin{fontsize}{7}{12}
 \begin{itemize}
     \item Plug in the definition for $H_{n+1}^{(c)}$:
 \begin{align*}
@@ -514,6 +516,7 @@ E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}&=
 \end{align*}
 \end{itemize}
  $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exists $l$ indices with $i_j\ge n+1$, because of the inherent symmetry property of the kernel function, w.l.o.g we can assume that the first $l$ random variables are not measurable. Then by Theorem 2 (i) for the H-decomposition,
+
 \begin{align*}
 E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n\}&=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}\\&=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
 \end{align*}
@@ -534,7 +537,8 @@ By the inherent symmetry of the kernel $\psi$ and the fact that samples $X_1, \d
 for every subset $\{i_1, \dotsc, i_k\}$ of $\{1,2,\dotsc,n\}$ and hence 
 \begin{align*}
     U_n=E(U_n|\mathcal{F}_n)&={n\choose k}^{-1}\sum_{(n,k)}E(\psi(X_{i_1}, \dotsc,X_{i_k})|\mathcal{F}_n)
-    =E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n).
+    =E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n).\\
+    \\
 \end{align*}
 \end{fontsize}
 \end{proof}
