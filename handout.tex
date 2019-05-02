@@ -64,15 +64,15 @@
 \thispagestyle{empty}
 
 \begin{center}
-{\LARGE \bf U-Statistics}\\
+{\LARGE \bf U-statistics}\\
 {\large Lily Chou, Kelly Kung, Zihuan Qiao}\\
 May 2, 2019
 \end{center}
 
-Throughout this semester in Probability Theory II, we have learned many concepts such as Law of Large Numbers, Central Limit Theorem, and Martingales. U-Statistics is an example from Statistics where many of the Probability concepts can be applied to. We begin the discussion of U-Statistics with some background information.
+Throughout this semester in Probability Theory II, we have learned many concepts such as Law of Large Numbers, Central Limit Theorem, and Martingales. U-statistics is an example from Statistics where many of the Probability concepts can be applied to. We begin the discussion of U-statistics with some background information.
 
 \section{Introduction}
-Before introducing the concept of U-Statistics, we will first define terms and introduce notation that will be used throughout this handout. 
+Before introducing the concept of U-statistics, we will first define terms and introduce notation that will be used throughout this handout. 
 \begin{Def}{}
 We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of distribution functions on $\R$, i.e. $\theta = \theta(F), F \in \mathcal{F}$.
 \end{Def}
@@ -81,7 +81,7 @@ We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of di
 For every sufficiently large $n$, we say that $\theta$ \text{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
 \end{Def}
 
-In 1946, Paul Halmos (\cite{halmos1946theory,}) asked two questions that prompted the study of U-Statistics:
+In 1946, Paul Halmos (\cite{halmos1946theory,}) asked two questions that prompted the study of U-statistics:
 \begin{enumerate}
     \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
     \item If such an estimator exists, what is it? If several exist, which is the best?
@@ -103,7 +103,7 @@ Note that for $n \geq k$, if we let $f_n(X_1, \dotsc, X_n) = \psi(X_1, \dotsc, X
 A functional $\theta(F)$ that satisfies Equation (2) for some function $\psi$ with $k$ variables is called a \textit{regular statistical functional of degree k}. Also, the function $\psi$ is called the \textit{kernel} of the functional. 
 \end{Def}
 
-In Theorem 1, the kernel function is only evaluated at $k$ random variables, but since we assume that we have independent identically distributed random variables $X_1, \dotsc, X_n$, it intuitively makes sense that we want a symmetric kernel function that is evaluated at all $n$ observations. 
+In Theorem 1, the kernel function is only evaluated at $k$ random variables, but since we assume that we have independent identically distributed (i.i.d) random variables $X_1, \dotsc, X_n$, it intuitively makes sense that we want a symmetric kernel function that is evaluated at all $n$ observations. 
 
 \begin{Def}
 A function is \textit{symmetric} if it is invariant under permutations of its arguments. 
@@ -161,7 +161,7 @@ Let $\mathcal{F}$ be the set of all distributions with finite second moment, i.e
 Note that $E(t(P_1, P_2)) = \mathbb{P}(P_1, P_2 \text{ concordant}) - \mathbb{P}(P_1, P_2 \text{ discordant})$, which verifies that $t(P_1, P_2)$ is indeed a kernel. Also, here, we have $k=2$. Using Equation \ref{u_stat}, we have that the estimator of Kendall's tau is $\tau_n = {n \choose 2}\sum_{(n,2)}t(P_i, P_j)$.
 \end{ex}
 
-\subsection{Variance of U-Statistics}
+\subsection{Variance of U-statistics}
 In the case of i.i.d random variables, we can express the variance of U-statistics in terms of conditional expectations. 
 
 \begin{Def}
@@ -327,20 +327,18 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \end{align*}
     Integrating both sides of equation (15) with respect to $\mu_j$ gives us 
     \begin{align*}
-        E\{h^{(j)}(x_1, \dotsc, x_{j-1}, X_j) \} &= h^{(j-1)}(x_1, \dotsc, x_{j-1})  - h^{(j-1)}(x_1, \dotsc, x_{j-1})\\
-        &= 0.
+        E\{h^{(j)}(x_1, \dotsc, x_{j-1}, X_j) \} &= h^{(j-1)}(x_1, \dotsc, x_{j-1})  - h^{(j-1)}(x_1, \dotsc, x_{j-1})= 0.
     \end{align*}
     Then by Theorem 4,
     \begin{align*}
-        h_c^{(j)}(x_1, \dotsc, x_c) &= E\{h_{j-1}^{(j)}(x_1, \dotsc, x_c, X_{c+1}, \cdots, X_{j-1}\} \\
-        &= 0,
+        h_c^{(j)}(x_1, \dotsc, x_c) &= E\{h_{j-1}^{(j)}(x_1, \dotsc, x_c, X_{c+1}, \cdots, X_{j-1}\} = 0,
     \end{align*}
-    this completes the proof for part (i). 
+    which completes the proof for part (i). 
     Using Theorem 4 part (ii) we see that 
     \begin{align}
         E\{h^{(j)}( X_{1}, \cdots, X_{j}\} &= E\{h_c^{(j)}( X_{1}, \cdots, X_{c}\} = 0.
     \end{align}
-    This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the jth.
+    This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the j-th.
     \end{proof}
  We now define 
     \begin{align}
@@ -352,7 +350,7 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
         var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
     \end{align}
     
-    It is important to notice that we use H-decomposition on the U-statistics because the variance of the component U- statistics $H_n^{(j)}$ are of order $n^{-j}$, and they're uncorrelated. To see the uncorrelatedness, the book proposed another theorem as follows:
+    It is important to notice that we use H-decomposition on the U-statistics because the variance of the component U-statistics $H_n^{(j)}$ are of order $n^{-j}$, and they're uncorrelated. To see the uncorrelatedness, the book proposed another theorem as follows:
     
     \begin{theorem}
     \begin{enumerate} [label = (\roman*)]
@@ -375,9 +373,7 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \end{theorem}
     \begin{proof}
     \begin{align*}
-        var(U_n) &= var(\theta + \sum_{j=1}^k {k \choose j}H_n^{(j)} \\
-        &= \sum_{j=1}^k {k \choose j}^2var(H_n^{(j)})\\
-        &= \sum_{j=1}^k {k \choose j}^2 {n \choose j}^{-1}\delta_j^2
+        var(U_n) &= var(\theta + \sum_{j=1}^k {k \choose j}H_n^{(j)}= \sum_{j=1}^k {k \choose j}^2var(H_n^{(j)}) = \sum_{j=1}^k {k \choose j}^2 {n \choose j}^{-1}\delta_j^2
     \end{align*}
     \end{proof}
 
@@ -385,18 +381,15 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \begin{align*}
         \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{c,j} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
     \end{align*}
-    thus take variance of both sides, we get 
+    Thus take variance of both sides, we get 
     \begin{align*}
-        \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} \\
-        &= \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) \\ 
-        &= \sum_{j = 1}^c {c \choose j} \delta_j^2.
+        \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} = \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) = \sum_{j = 1}^c {c \choose j} \delta_j^2.
     \end{align*}
     
     By using binomial coefficients, we could try to invert the last expression. Multiply both sides of the equation above by  $(-1)^{d-c} {d \choose c}$, and taking the sum from $c = 1$ to $d$ gives us
     \begin{align*}
         \sum_{c=1}^d {d \choose c} (-1)^{d-c} \sigma_{c}^2 &= \sum_{c=1}^d  
-       \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
-       &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
+       \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 = \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
     \end{align*}
     The term inside the braces is zero except when $j = d$; hence we get 
     \begin{align*}
@@ -487,11 +480,11 @@ An integrable sequence $\{X_n: n\ge 1\}$ adapted to a decreasing sequence of sub
 \end{align*}
 \end{Def}
 
-The reverse martingale has nice convergence properties which is stated in theorem \ref{conv_rm}.
+The reverse martingale has nice convergence properties which is stated in Theorem \ref{conv_rm}.
 \begin{theorem}\label{conv_rm}
 Let $\{X_n\}$ be a reverse martingale. Then $X_n$ converges to $E(X_1|\mathcal{F}_{\infty})$ almost surely and in $L_1$. 
 \end{theorem}
-To prove this theorem, we can apply similar techniques as we used for proving the convergence of martingales and we are going to omit the proof here. The convergence property of the reverse martingale will be quite useful in the proof for strong law of large numbers for the U-Statistics in the next section.
+To prove this theorem, we can apply similar techniques as we used for proving the convergence of martingales and we are going to omit the proof here. The convergence property of the reverse martingale will be quite useful in the proof for strong law of large numbers for the U-statistics in the next section.
 
 \subsection{U-statistics as martingales}
 \begin{theorem}\label{mat}
