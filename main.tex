@@ -279,7 +279,7 @@ where $c = 2, \dotsc, k$.
 \end{Def}
 \end{frame}
 
-\begin{frame}{H-decomposition}
+\begin{frame}{H-decomposition cont. }
  \begin{theorem}
 For $j = 1, \dotsc, k$, let $H_n^{(j)}$ be the U-statistic based on the kernel $h^{(j)}$, where \begin{align}
 H_n^{(j)} = {n \choose j}^{-1} \sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}). 
@@ -291,7 +291,7 @@ Then,
 \end{theorem}   
 \end{frame}
 
-\begin{frame}{H-decomposition}
+\begin{frame}{H-decomposition cont. }
 \begin{proof}
 \begin{itemize}
     \item Let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum_{(n,j)} h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$. 
@@ -308,7 +308,7 @@ Then,
 \end{proof}    
 \end{frame}
 
-\begin{frame}{H-decomposition}
+\begin{frame}{H-decomposition cont. }
 \begin{Rmk}
 We can also truncate the H-decomposition up to $c$ terms 
 \begin{align}
@@ -331,7 +331,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \end{Rmk}    
 \end{frame}
 
-\begin{frame}{H-decomposition}
+\begin{frame}{H-decomposition cont. }
 \begin{fontsize}{8}{12}
      We denote the $c$-th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h^{(j)}$ has these properties: 
     \begin{theorem}
@@ -353,7 +353,11 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
     \end{frame} 
     
     \begin{frame}{H-decomposition}
-        
+        H-decomposition is useful because
+        \begin{itemize}
+            \item variance of the component U-statistics $H_n^{j}$ are of order $n^{j}$
+            \item $H_n^{j}$'s are uncorrelated
+        \end{itemize}
         \begin{theorem}
     \begin{itemize}
         \item Let $j <j'$ and let $S_1$ and $S_2$ be a j-subset of $\{1, \dotsc, n\}$ and a j'-subset of $\{1, \dotsc, n\}$, respectively. Then, $cov(h^{(j)}(S_1), h^{(j')}(S_2)) = 0$ and so $cov(H_n^{(j)}, H_n^{(j')}) = 0$
@@ -363,45 +367,34 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
     \end{frame}
     
     
-\begin{frame}{H-decomposition}
+\begin{frame}{H-decomposition cont.}
+\begin{fontsize}{7}{12}
+     Now we try to write $U_n$ in terms of the variance $\delta_j$ of $h^{(j)}$: 
     \begin{theorem}
-    The variance of $U_n$ is given by 
-    \begin{align}
-        var(U_n) = \sum_{j=1}^k {k \choose j}^2 {n \choose j}^{-1}\delta_j^2
-    \end{align}
+The variance of $U_n$ is given by 
+       $ var(U_n) = \sum_{j=1}^k {k \choose j}^2 {n \choose j}^{-1}\delta_j^2$.
     \end{theorem}
     Relations describing $\sigma_{c}^2$ in terms of the $\delta_j^2 $ and vice versa can be derived as follows: from the definition of H-decomposition, we have 
     \begin{align*}
         \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{c,j} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
     \end{align*}
-    \end{frame}
-    
-    \begin{frame}{H-decomposition}
-    \begin{fontsize}{7}{12}
-    Take variance of both sides,  we get 
+     Take variance of both sides,  we get 
     \begin{align*}
         \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} \\
-        &= \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) \\ 
-        &= \sum_{j = 1}^c {c \choose j} \delta_j^2.
-    \end{align*}
-
-    \begin{align*}
-        \sum_{c=1}^d {d \choose c} (-1)^{d-c} \sigma_{c}^2 &= \sum_{c=1}^d  
-       \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
-       &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
+        &= \sum_{j = 1}^c {c \choose j}^2 Var( H_c^{(j)}) 
+        = \sum_{j = 1}^c {c \choose j} \delta_j^2.
     \end{align*}
     The term inside the braces is zero except when $j = d$; hence we get 
     \begin{align*}
-        \delta_d^2 = \sum_{c = 1}^d (-1)^{b-c} {d \choose c} \sigma_{c}^2
+        \delta_d^2 = \sum_{c = 1}^d (-1)^{b-c} {d \choose c} \sigma_{c}^2.
     \end{align*}
     \end{fontsize}
     \end{frame}
-    
-    
+
+
 
 \section{Central Limit Theorem}
 \begin{frame}{CLT for i.i.d case}
-
 \begin{fontsize}{7}{12}  
 \begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
