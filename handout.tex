@@ -337,9 +337,9 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \end{align*}
     this completes the proof for part (i). 
     Using Theorem 4 part (ii) we see that 
-    \begin{align*}
-        E\{h^{(j)}( X_{1}, \cdots, X_{j}\} &= E\{h_c^{(j)}( X_{1}, \cdots, X_{c}\} = 0.\label{h_func_rep}
-    \end{align*}
+    \begin{align}
+        E\{h^{(j)}( X_{1}, \cdots, X_{j}\} &= E\{h_c^{(j)}( X_{1}, \cdots, X_{c}\} = 0.
+    \end{align}
     This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the jth.
     \end{proof}
  We now define 
@@ -352,6 +352,8 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
         var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
     \end{align}
     
+    It is important to notice that we use H-decomposition on the U-statistics because the variance of the component U- statistics $H_n^{(j)}$ are of order $n^{-j}$, and they're uncorrelated. To see the uncorrelatedness, the book proposed another theorem as follows:
+    
     \begin{theorem}
     \begin{enumerate} [label = (\roman*)]
         \item Let $j <j'$ and let $S_1$ and $S_2$ be a j-subset of $\{1, \dotsc, n\}$ and a j'-subset of $\{1, \dotsc, n\}$, respectively. Then, $cov(h^{(j)}(S_1), h^{(j')}(S_2)) = 0$ and so $cov(H_n^{(j)}, H_n^{(j')}) = 0$
@@ -359,7 +361,10 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \end{enumerate}
     \end{theorem}
     
+    
+\begin{proof}
 
+\end{proof}
 
     
     \begin{theorem}
