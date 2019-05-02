@@ -468,7 +468,6 @@ An integrable sequence $\{X_n: n\ge 1\}$ adapted to a filtration $\{F_n: n\ge 0\
  E(X_{n+1}|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge0.
 \end{align*}
 \end{Def}
-
 Accordingly, the definition for filtration is:
 \begin{Def}
 Let $(\Omega, \mathcal{F}, \mathcal{P})$ be a probability space. Let $\{\mathcal{F}_n: n\ge1\}$ be a sequence of sub $\sigma$-algebras such that the sequence is increasing: $\mathcal{F}_1 \sqsubset \mathcal{F}_2 \sqsubset \dotsc \sqsubset \mathcal{F}$. Such a sequence $\{\mathcal{F}_n: n\ge1\}$ is called a filtration. 
@@ -490,39 +489,11 @@ Let $\{X_n\}$ be a reverse martingale. Then $X_n$ converges to $E(X_1|\mathcal{F
 To prove this theorem, we can apply similar techniques as we used for proving the convergence of martingales and we are going to omit the proof here. The convergence property of the reverse martingale will be quite useful in the proof for strong law of large numbers for the U-Statistics in the next section.
 
 \subsection{U-statistics as martingales}
-\begin{theorem}
-Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$. Then $\{U_n\}_{n=k}^\infty$ is a reverse martingale adapted to the $\sigma$-fields $\mathcal{F}_n=\sigma\{U_n, U_{n+1,\dotsc}\}$.
-\end{theorem}
-
-\begin{proof}
-The $\sigma$-fields $\mathcal{F}_n$ are decreasing clearly. Because of the inherent symmetry of the kernel $\psi$ and that samples $X_1, \dotsc, X_k$ are i.i.d, we can write:
-\begin{align*}
-    E(\psi (X_{i_1}, \dotsc, X_{i_k})|\mathcal{F}_n)=E(\psi (X_1, \dotsc, X_k)|\mathcal{F}_n)
-\end{align*}
-for every subset $\{i_1, \dotsc, i_k\}$ of $\{1,2,\dotsc,n\}$ and hence 
-\begin{align*}
-    U_n=E(U_n|\mathcal{F}_n)&={n\choose k}^{-1}\sum_{(n,k)}E(\psi(X_{i_1}, \dotsc,X_{i_k})|\mathcal{F}_n)
-    =E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n).
-\end{align*}
-Then we check the integrability of $U_n$
-\begin{align*}
-E(|U_n|)&=E(|E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n)|)\le E(E(|\psi(X_1,\dotsc,X_k)||\mathcal{F}_n))
-=E(|\psi(X_1,\dotsc, X_k)|)<\infty
-\end{align*}
-
-Let $n\ge m$. Then since $\mathcal{F}_n \subseteq \mathcal{F}_m$,
-\begin{align*}
-    E(U_m|\mathcal{F}_n)&=E\{E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_m)|\mathcal{F}_n\}
-    =E\{\psi(X_1,\dotsc,X_k)|\mathcal{F}_n\}
-    =U_n.
-\end{align*}
-\end{proof}
-
 \begin{theorem}\label{mat}
 Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$, and let $\mathcal{F}_n=\sigma\{X_1, \dotsc, X_n\}$. Then $\{{n \choose c} H_n^{(c)}\}_{n=c}^\infty$ is a martingale adapted to the $\mathcal{F}_n$ for $c=1,\dotsc, k$.
 \end{theorem}
 \begin{proof}
-The $\sigma$-fields $\mathcal{F}_n$ are increasing clearly. It's also easy to check the integrability of random variables $H_n^{(c)}$: Since $h^{(1)}(x_1)=\psi_1(x_1)-\theta$ and $\psi(X_1)$ is integrable, then $h^{(1)}(X_1)$ is integerable. By
+The $\sigma$-fields $\mathcal{F}_n$ are increasing clearly. It's also easy to check the integrability of random variables $H_n^{(c)}$: Since $h^{(1)}(x_1)=\psi_1(x_1)-\theta$ and $\psi_1(x_1)$ is integrable, then $h^{(1)}(x_1)$ is integerable. By
 \begin{align*}
 h^{(c)}(x_1,\dotsc,x_c)=\psi_c(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
 \end{align*}
@@ -532,10 +503,9 @@ Then we have
 E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}=E\{{{n+1}\choose c}{{n+1}\choose c}^{-1}\sum_{(n+1,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=
 \sum_{(n+1,c)}E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}
 \end{align*}
-
 and $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exist $l$ indices with $i_j\ge n+1$, Since the inherent symmetry property of the kernal function, without loss of generality we can assume that the first $l$ random variabels are not measurable, then
 \begin{align*}
-E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
+E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n\}=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
 \end{align*}
 The last equality holds because of Theorem 2 (i) for the H-decomposition. Hence
 \begin{align*}
@@ -543,45 +513,6 @@ E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}=\sum_{(n,c)}h^{(c)}(X_{i_1},\d
 \end{align*}
 \end{proof}
 
-\section{SLLN for U-statistics}
-\begin{theorem}
-Suppose $E|\psi(X_1, \dotsc,X_k)|<\infty$. Then $U_n$ converges a.s. to $\theta$.
-\end{theorem}
-\begin{proof}
-Since $U_n$ is a reverse martingale adapted to the 
-\end{proof}
-
-\section{Martingales for U-statistics}
-\subsection{Reverse martingales}
-First, recall the definition of a martingale from class:
-\begin{Def}
-An integrable sequence $\{X_n: n\ge 1\}$ adapted to a filtration $\{F_n: n\ge 0\}$ is a martingale if
-\begin{align*}
- E(X_{n+1}|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge0.
-\end{align*}
-\end{Def}
-
-Accordingly, the definition for filtration is:
-\begin{Def}
-Let $(\Omega, \mathcal{F}, \mathcal{P})$ be a probability space. Let $\{\mathcal{F}_n: n\ge1\}$ be a sequence of sub $\sigma$-algebras such that the sequence is increasing: $\mathcal{F}_1 \sqsubset \mathcal{F}_2 \sqsubset \dotsc \sqsubset \mathcal{F}$. Such a sequence $\{\mathcal{F}_n: n\ge1\}$ is called a filtration. 
-\end{Def}
-%For a martingale $\{X_n: n\ge 1\}$, without further specification, we usually assume the natural filtration, which is $\mathcal{F}_n=\sigma \{X_1, X_2, \dotsc, X_n\}$.
-
-Similar to the definition for martingales, we can define reverse martingale as the following:
-\begin{Def}
-An integrable sequence $\{X_n: n\ge 1\}$ adapted to a decreasing sequence of sub $\sigma$-algebras $\{F_n: n\ge 0\}$ is a reverse martingale if
-\begin{align*}
- E(X_m|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge m.
-\end{align*}
-\end{Def}
-
-The reverse martingale has nice convergence properties which is stated in theorem \ref{conv_rm}.
-\begin{theorem}\label{conv_rm}
-Let $\{X_n\}$ be a reverse martingale. Then $X_n$ converges to $E(X_1|\mathcal{F}_{\infty})$ almost surely and in $L_1$. 
-\end{theorem}
-To prove this theorem, we can apply similar techniques as we used for proving the convergence of martingales and we are going to omit the proof here. The convergence property of the reverse martingale will be quite useful in the proof for strong law of large numbers for the U-Statistics in the next section.
-
-\subsection{U-statistics as martingales}
 \begin{theorem}
 Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$. Then $\{U_n\}_{n=k}^\infty$ is a reverse martingale adapted to the $\sigma$-fields $\mathcal{F}_n=\sigma\{U_n, U_{n+1,\dotsc}\}$.
 \end{theorem}
@@ -601,7 +532,6 @@ Then we check the integrability of $U_n$
 E(|U_n|)&=E(|E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n)|)\le E(E(|\psi(X_1,\dotsc,X_k)||\mathcal{F}_n))
 =E(|\psi(X_1,\dotsc, X_k)|)<\infty
 \end{align*}
-
 Let $n\ge m$. Then since $\mathcal{F}_n \subseteq \mathcal{F}_m$,
 \begin{align*}
     E(U_m|\mathcal{F}_n)&=E\{E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_m)|\mathcal{F}_n\}
@@ -610,37 +540,36 @@ Let $n\ge m$. Then since $\mathcal{F}_n \subseteq \mathcal{F}_m$,
 \end{align*}
 \end{proof}
 
-\begin{theorem}\label{mat}
-Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$, and let $\mathcal{F}_n=\sigma\{X_1, \dotsc, X_n\}$. Then $\{{n \choose c} H_n^{(c)}\}_{n=c}^\infty$ is a martingale adapted to the $\mathcal{F}_n$ for $c=1,\dotsc, k$.
-\end{theorem}
-\begin{proof}
-The $\sigma$-fields $\mathcal{F}_n$ are increasing clearly. It's also easy to check the integrability of random variables $H_n^{(c)}$: Since $h^{(1)}(x_1)=\psi_1(x_1)-\theta$ and $\psi(X_1)$ is integrable, then $h^{(1)}(X_1)$ is integerable. By
-\begin{align*}
-h^{(c)}(x_1,\dotsc,x_c)=\psi(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
-\end{align*}
-Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
-Then we have 
-\begin{align*}
-E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}=E\{{{n+1}\choose c}{{n+1}\choose c}^{-1}\sum_{(n+1,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=
-\sum_{(n+1,c)}E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}
-\end{align*}
-
-and $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exist $l$ indices with $i_j\ge n+1$, Since the inherent symmetry property of the kernal function, without loss of generality we can assume that the first $l$ random variabels are not measurable, then
-\begin{align*}
-E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
-\end{align*}
-The last equality holds because of Theorem 2 (i) for the H-decomposition. Hence
-\begin{align*}
-E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}=\sum_{(n,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})={n\choose c}H_n^{(c)}
-\end{align*}
-\end{proof}
-
 \section{SLLN for U-statistics}
 \begin{theorem}
 Suppose $E|\psi(X_1, \dotsc,X_k)|<\infty$. Then $U_n$ converges a.s. to $\theta$.
 \end{theorem}
 \begin{proof}
-Since $U_n$ is a reverse martingale adapted to the 
+Since $U_n$ is a reverse martingale adapted to the $\sigma$-field $\mathcal{F}_n$, we have by Theorem \ref{conv_rm} that 
+\begin{align*}
+\lim_n U_n = \lim_n E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n)=E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_\infty)    
+\end{align*}
+where $\mathcal{F}_\infty$ is the $\sigma$-field $\bigcap_{n=k}^\infty \mathcal{F}_n$. Hence
+\begin{align*}
+E(\lim_n U_n)=E\{E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_\infty)\}=E\psi(X_1, \dotsc,X_k)=\theta
+\end{align*}
+
+Now let $\mathcal{G}_n=\sigma(X_n,X_{n+1},\dotsc)$, and denote by $\mathcal{G}_\infty$ the tail $\sigma$-field $\bigcap_{n=k}^\infty \mathcal{G}_n$. By the Kolmogorov Zero-One law, the events of $\mathcal{G}_\infty$ have probability 0 or 1, and $\mathcal{G}_\infty$-measurable functions are almost surely constant. Hence it is enough to prove that $\lim_n U_n$ is $\mathcal{G}_\infty$-measurable, for then $\lim_n U_n$ is constant, and hence must equal its expectation $E\psi(X_1,\dotsc,X_k)$.
+
+To prove this, we need to show that $\lim U_n$ is $\mathcal{G}_m$-measurable for some arbitrary $m>k$. Write
+\begin{align*}
+U_n={n\choose k}^{-1}S_n+{n\choose k}^{-1}T_n
+\end{align*}
+where $T_n$ is the sum of all terms $\psi(X_{i_1},\dotsc,X_{i_k})$ for which at least one index $i_j<m$, and $S_n$ is the sum of all terms all of whose indices are greater than or equal to $m$. Then ${n\choose k}^{-1}S_n$ is $\mathcal{G}_m$-measurable for all $n>m$, and so is $\lim_n {n \choose k}^{-1}S_n$, provided the limit exists.
+
+Now we are going to prove that $\lim_n {n\choose k}^{-1}T_n$ is zero. Note that $T_n=\sum_{p=1}^{k-1}T_n^{(p)}$, the $p^{th}$ term consists of $\psi$ summed over sets having exactly $p$ indices $\ge m$, and $(k-p)$ indices $<m$. Follow the definition of reverse martingales, we can check that ${{n-m+1}^{-1}\choose p}T_n^{(p)}$ is a reverse martingale. Then by theorem \ref{conv_rm}, it converges to an integrable random variable for all $p=1,2,\dotsc,k-1$. Since ${{n-m+1}\choose p}{n\choose k}^{-1}=\mathcal{O}(n^{-1})$. Thus
+\begin{align*}
+\lim_n {n\choose k}^{-1} T_n=\lim_n {n\choose k}^{-1} \sum_{p=1}^{k-1}T_n^{(p)}=\sum_{p=1}^{k-1}\lim_n\underbrace{ {{n-m+1}\choose p}{n\choose k}^{-1}}_{\mathcal{O}(n^{-1})}\underbrace{{{n-m+1}\choose p}^{-1}T_n^{(p)}}_{\xrightarrow{a.s.}\text{integrable r.v.}}=0
+\end{align*}
+
+Thus, $\lim_n U_n=\lim_n{n\choose k}^{-1}S_n$ and $\lim_n U_n$ is $\mathcal{G}_m$-measurable. Since $m$ is arbitrary, $\lim_n U_n$ is $\mathcal{G}_\infty$-measurable and hence is constant a.s.
 \end{proof}
+
+
 
 \end{document}

@@ -437,12 +437,154 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
     \end{fontsize}
   \end{frame}
 
-\section{U-statistics as Martingales}
-\begin{frame}{U-statistics as Martingales}
+\section{Reverse Martingales}
+\begin{frame}{Reverse Martingales}
+\begin{Def}
+An integrable sequence $\{X_n: n\ge 1\}$ adapted to an increasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a martingale if
+\begin{align*}
+ E(X_{n+1}|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge0.
+\end{align*}
+\end{Def}
+\begin{Def}
+An integrable sequence $\{X_n: n\ge 1\}$ adapted to a decreasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a reverse martingale if
+\begin{align*}
+ E(X_m|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge m.
+\end{align*}
+\end{Def}
 \end{frame}
+\begin{frame}{Convergence result for reverse martingales}
+\begin{theorem}\label{conv_rm}
+Let $\{X_n\}$ be a reverse martingale. Then $X_n$ converges to $E(X_1|\mathcal{F}_{\infty})$ almost surely and in $L_1$. 
+\end{theorem}
+\end{frame}
+
+\section{U-statistics as martingales}
+\begin{frame}{U-statistics as martingales}
+\begin{theorem}\label{mat}
+Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$, and let $\mathcal{F}_n=\sigma\{X_1, \dotsc, X_n\}$. Then $\{{n \choose c} H_n^{(c)}\}_{n=c}^\infty$ is a martingale adapted to the $\mathcal{F}_n$ for $c=1,\dotsc, k$.
+\end{theorem}
+\begin{fontsize}{9}{12}
+\begin{proof}
+\begin{itemize}
+    \item Check r.v.s $H_n^{(c)}$ are integrable: By
+\begin{align*}
+h^{(1)}(x_1)&=\psi_1(x_1)-\theta\\
+h^{(c)}(x_1,\dotsc,x_c)&=\psi_c(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
+\end{align*}
+Since  and $\psi_1(x_1)$ is integrable by law of total expectation and the assumption that $E|\psi(X_1, \dotsc, X_k)|<\infty$, then $h^{(1)}(x_1)$ is integerable. Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
+\end{itemize}
+\end{proof}
+\end{fontsize}
+\end{frame}
+
+\begin{frame}{Proof cont'd}
+\begin{proof}
+\begin{fontsize}{9}{12}
+\begin{itemize}
+    \item Plug in the definition for $H_{n+1}^{(c)}$:
+\begin{align*}
+E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}&=
+\sum_{(n+1,c)}E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}\\
+&=\sum_{(n,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})={n\choose c}H_n^{(c)}
+\end{align*}
+\end{itemize}
+ $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exist $l$ indices with $i_j\ge n+1$, Since the inherent symmetry property of the kernal function, w.l.o.g we can assume that the first $l$ random variabels are not measurable, then by Theorem 2 (i) for the H-decomposition.
+\begin{align*}
+E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n\}&=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}\\&=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
+\end{align*}
+\end{fontsize}
+\end{proof}
+\end{frame}
+
+\begin{frame}{U-statistics as martingales}
+\begin{theorem}
+Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\psi(X_1, \dotsc, X_k)|<\infty$. Then $\{U_n\}_{n=k}^\infty$ is a reverse martingale adapted to the $\sigma$-fields $\mathcal{F}_n=\sigma\{U_n, U_{n+1,\dotsc}\}$.
+\end{theorem}
+\begin{proof}
+\begin{fontsize}{9}{12}
+By the inherent symmetry of the kernel $\psi$ and that samples $X_1, \dotsc, X_k$ are i.i.d, write:
+\begin{align*}
+    E(\psi (X_{i_1}, \dotsc, X_{i_k})|\mathcal{F}_n)=E(\psi (X_1, \dotsc, X_k)|\mathcal{F}_n)
+\end{align*}
+for every subset $\{i_1, \dotsc, i_k\}$ of $\{1,2,\dotsc,n\}$ and hence 
+\begin{align*}
+    U_n=E(U_n|\mathcal{F}_n)&={n\choose k}^{-1}\sum_{(n,k)}E(\psi(X_{i_1}, \dotsc,X_{i_k})|\mathcal{F}_n)
+    =E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n).
+\end{align*}
+\end{fontsize}
+\end{proof}
+\end{frame}
+
+\begin{frame}{Proof Cont'd}
+\begin{fontsize}{9}{12}
+\begin{proof}
+\begin{itemize}
+    \item Check the integrability of $U_n$
+\begin{align*}
+E(|U_n|)&=E(|E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n)|)\le E(E(|\psi(X_1,\dotsc,X_k)||\mathcal{F}_n))\\
+&=E(|\psi(X_1,\dotsc, X_k)|)<\infty
+\end{align*}
+    \item Let $n\ge m$. Then since $\mathcal{F}_n \subseteq \mathcal{F}_m$,
+    \begin{align*}
+    E(U_m|\mathcal{F}_n)&=E\{E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_m)|\mathcal{F}_n\}\\
+    &=E\{\psi(X_1,\dotsc,X_k)|\mathcal{F}_n\}
+    =U_n.
+\end{align*}
+\end{itemize}
+\end{proof}
+\end{fontsize}
+\end{frame}
+
 \section{Strong Law of Large Numbers}
-\begin{frame}{SLLN}
+\begin{frame}{SLLN for U-statistics}
+\begin{theorem}
+Suppose $E|\psi(X_1, \dotsc,X_k)|<\infty$. Then $U_n$ converges a.s. to $\theta$.
+\end{theorem}
+Outline of the proof:
+\begin{itemize}
+    \item Prove $E(\lim_n U_n)=\theta$
+    \item Define $\mathcal{G}_n=\sigma(X_n,X_{n+1},\dotsc)$ and $\mathcal{G}_\infty=\bigcap_{n=k}^\infty\mathcal{G}_n$. Prove that $\lim U_n$ is $\mathcal{G}_\infty$-measurable, then by the Kolmogorov Zero-One law, $\lim U_n$ is a constant which equals to $\theta$ almost surely.
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Proof for SLLN for U-statistics}
+Proof for step 1:
+\begin{proof}
+Since $U_n$ is a reverse martingale adapted to the $\sigma$-field $\mathcal{F}_n$, we have by the convergence property of reverse martingale:
+\begin{align*}
+\lim_n U_n = \lim_n E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_n)=E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_\infty)    
+\end{align*}
+where $\mathcal{F}_\infty$ is the $\sigma$-field $\bigcap_{n=k}^\infty \mathcal{F}_n$. Hence
+\begin{align*}
+E(\lim_n U_n)=E\{E(\psi(X_1,\dotsc,X_k)|\mathcal{F}_\infty)\}=E\psi(X_1, \dotsc,X_k)=\theta
+\end{align*}
+\end{proof}
+\end{frame}
+
+\begin{frame}{Proof for SLLN for U-statistics Cont'd}
+Proof for step 2:
+\begin{fontsize}{6}{12}
+\begin{proof}
+To prove this, we need to show that $\lim U_n$ is $\mathcal{G}_m$-measurable for some arbitrary $m>k$. Write
+\begin{align*}
+U_n={n\choose k}^{-1}\underbrace{S_n}_{\mathcal{G}_m\text{-measurable}}+{n\choose k}^{-1}\underbrace{T_n}_{\text{not } \mathcal{G}_m\text{-measurable}}
+\end{align*}
+where $S_n$ and $T_n$ are the sums of all terms $\psi(X_{i_1},\dotsc,X_{i_k})$ for which:
+\begin{itemize}
+    \item $S_n$: all indices of $X_{i_j}$ are $\ge m$
+    \item $T_n$: some indices of $X_{i_j}$ are $< m$
+\end{itemize}
+\begin{align*}
+\lim_n {n\choose k}^{-1} T_n=\lim_n {n\choose k}^{-1} \sum_{p=1}^{k-1}T_n^{(p)}=\sum_{p=1}^{k-1}\lim_n\underbrace{ {{n-m+1}\choose p}{n\choose k}^{-1}}_{\mathcal{O}(n^{-1})}\underbrace{{{n-m+1}\choose p}^{-1}T_n^{(p)}}_{\xrightarrow{a.s.}\text{integrable r.v.}}=0
+\end{align*}
+\begin{itemize}
+    \item $T_n^{(p)}$: $\psi$ summed over all sets having exactly $p$ indices $\ge m$ ($\mathcal{G}_m$-measurable). Since need at least 1 non-measurable variable, $k-p\ge1$.
+    \item ${{n-m+1}\choose p}^{-1}T_n^{(p)}$: reverse martingale. By convergence theorem, convergent a.s. to integrable r.v.
+\end{itemize}
+\end{proof}
+\end{fontsize}
+\end{frame}
+
 \begin{frame}{References}
 \printbibliography
 \end{frame}
