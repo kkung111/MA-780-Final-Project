@@ -324,7 +324,8 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \end{frame}
 
 \begin{frame}{H-decomposition}
-     Some properties of $h^{(j)}$ include
+\begin{fontsize}{8}{12}
+     We denote the $c$th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h^{(j)}$ has these properties: 
     \begin{theorem}
     \begin{itemize}
         \item For $c = 1, \dotsc, j-1$ and $j = 1, \dotsc, k$, $h_c^{(j)}(x_1, \dotsc, x_c) = 0$
@@ -336,9 +337,11 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
     \begin{align}
         \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
     \end{align}
+    Then by the theorem on variance of U-statistics, we have
     \begin{align}
         var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
          \end{align}
+         \end{fontsize}
     \end{frame} 
     
     \begin{frame}{H-decomposition}
