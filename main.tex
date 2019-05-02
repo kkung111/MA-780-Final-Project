@@ -352,7 +352,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
          \end{fontsize}
     \end{frame} 
     
-    \begin{frame}{H-decomposition}
+    \begin{frame}{H-decomposition cont.}
         H-decomposition is useful because
         \begin{itemize}
             \item variance of the component U-statistics $H_n^{j}$ are of order $n^{j}$
@@ -436,34 +436,31 @@ The variance of $U_n$ is given by
 \end{frame}
 
     
-    \begin{frame}{CLT for U-statistics for Independent r.v.s}
-    \begin{fontsize}{6}{12}
+%    \begin{frame}{CLT for U-statistics for Independent r.v.s}
+ %   \begin{fontsize}{6}{12}
 
-    \begin{theorem}
-     Let $X_1, X_2, \cdots,$ be independent r.v.s with distribution functions $F_1, F_2, \cdots$. Define for $i = 1,2, \cdots, n$
-    \begin{align}
-        \phi_{1,i} (x) = {n-1 \choose k-1}^{-1} \sum_{(n-1, k-1)}^{(-i)} \phi_{1, i; i_2, \cdots, i_k}(x)
-    \end{align}
-    where the sum is taken over all $(k-1)$-subsets $\{i_2, \cdots, i_k\}$ of $\{1,2, \cdots, n\}$ that do not contain $i$, and 
-    \begin{align}
-        \phi_{1, i; i_2, \cdots, i_k}(x) = E \phi(x, X_{i2}, \cdots, X_{i_k}) - \theta(i, i_2, \cdots, i_k).
-    \end{align}
-    Suppose that 
-    \begin{itemize}
-        \item $Var \phi(X_{i_1}, \cdots, X_{i_k} ) < A$ for some constant $A$ and all $i_1, \cdots, i_k$;
-        \item For some $\delta > 0, E|\phi_{1, i} (X_i) |^{2 + \delta} < \infty$ for all $i$, and 
-        \begin{align}
-            \lim_{n \rightarrow \infty} \sum_{i =1}^{n} E|\phi_{1, i} (X_i) |^{2 + \delta} \Big/ (\sum_{i =1}^{n} E|\phi_{1, i} (X_i)^2 |) ^{(2 + \delta)/2} = 0
-        \end{align}
-       Then $(U_n - E(U_n)) / (Var U_n)^{\frac{1}{2}} \xrightarrow{\mathcal{D}} N(0,1).$ 
-    \end{itemize}
-    \end{theorem}
-    \end{fontsize}
-  \end{frame}
+   % \begin{theorem}
+   %  Let $X_1, X_2, \cdots,$ be independent r.v.s with %distribution functions $F_1, F_2, \cdots$. Define for $i = 1,2, \cdots, n$
+ %   \begin{align}
+    %    \phi_{1,i} (x) = {n-1 \choose k-1}^{-1} \sum_{(n-1, %k-1)}^{(-i)} \phi_{1, i; i_2, \cdots, i_k}(x)
+  %  \end{align}
+   % where the sum is taken over all $(k-1)$-subsets $\{i_2, %\cdots, i_k\}$ of $\{1,2, \cdots, n\}$ that do not contain %$i$, and 
+   % \begin{align}
+    %    \phi_{1, i; i_2, \cdots, i_k}(x) = E \phi(x, X_{i2}, %\cdots, X_{i_k}) - \theta(i, i_2, \cdots, i_k).
+  %%  \end{align}
+  %  Suppose that 
+  %  \begin{itemize}
+  %      \item $Var \phi(X_{i_1}, \cdots, X_{i_k} ) < A$ for some constant $A$ and all $i_1, \cdots, i_k$;
+  %      \item For some $\delta > 0, E|\phi_{1, i} (X_i) |^{2 + \delta} < \infty$ for all $i$, and 
+  %      \begin{align}
+  %          \lim_{n \rightarrow \infty} \sum_{i =1}^{n} %E|\phi_{1, i} (X_i) |^{2 + \delta} \Big/ (\sum_{i %=1}^{n} E|\phi_{1, i} (X_i)^2 |) ^{(2 + \delta)/2} %= 0
+  %      \end{align}
+   %    Then $(U_n - E(U_n)) / (Var U_n)^{\frac{1}{2}} %\xrightarrow{\mathcal{D}} N(0,1).$ 
+  %  \end{itemize}
+ %   \end{theorem}
+ %   \end{fontsize}
+ % \end{frame}
   
-  \begin{frame}{CLT independent case proof sketch}
-      
-  \end{frame}
 
 \section{Reverse Martingales}
 \begin{frame}{Reverse Martingales}
