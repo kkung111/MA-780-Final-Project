@@ -284,7 +284,7 @@ Then,
 \end{align}
 \end{theorem}
 \begin{proof}
-First, let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which is summed over all $j$-subsets $\{\nu_1, \dotsc, \nu_j\}$ of $\{1, \dotsc, n\}$. Then, we have the relationship $\sum_{(n,k)}S_j\{i_1, \dotsc, i_k\} = {n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which holds due to the identity ${n-j \choose k-j}{n \choose j} = {n \choose k}{k \choose j} \implies {n \choose k}^{-1}{n-j \choose k-j} = {k \choose j}{n \choose j}^{-1}$. We can then decompose $U_n$ as follows.
+First, let $S_j\{i_1, \dotsc, i_k\}$ denote the sum $\sum h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which is summed over all $j$-subsets $\{\nu_1, \dotsc, \nu_j\}$ of $\{i_1, \dotsc, i_k\}$. Then, we have the relationship $\sum_{(n,k)}S_j\{i_1, \dotsc, i_k\} = {n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j})$, which holds due to the identity ${n-j \choose k-j}{n \choose j} = {n \choose k}{k \choose j} \implies {n \choose k}^{-1}{n-j \choose k-j} = {k \choose j}{n \choose j}^{-1}$. We can then decompose $U_n$ as follows.
 \begin{align*}
     U_n &= {n \choose k}^{-1}\sum_{(n,k)}\psi(x_{i_1}, \dotsc, x_{i_k}) = {n \choose k}^{-1}\sum_{(n,k)}\left[\sum_{j=1}^kS_j\{i_1, \dotsc, i_k\} + \theta \right] &&\text{[from Eq. \ref{h_recursive} with $c = k$]} \\
     &= \theta + {n \choose k}^{-1}\sum_{j=1}^k{n-j \choose k-j}\sum_{(n,j)}h^{(j)}(x_{\nu_1}, \dotsc, x_{\nu_j}) = \theta + {n \choose k}^{-1}\sum_{j=1}^k{k \choose j}H_n^{(j)}
