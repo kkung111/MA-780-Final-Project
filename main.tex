@@ -1,5 +1,5 @@
-\documentclass{beamer}
-%\documentclass[handout]{beamer}
+%\documentclass{beamer}
+\documentclass[handout]{beamer}
 
 % For more themes, color themes and font themes, see:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
@@ -30,6 +30,8 @@
 \usepackage{pgfpages}
 \pgfpagesuselayout{resize to}[%
   physical paper width=8in, physical paper height=6in]
+
+\newcommand{\kk}[2][]{\todo[color=purple!20,#1]{KK: #2}}
 
 %%%%%%%%%%new commands%%%%%%%%%%%%
 \newcommand{\N}{{\mathbb{N}}}
@@ -63,6 +65,12 @@
   \titlepage
 \end{frame}
 
+\begin{frame}{Motivation}
+ \begin{itemize}
+     \item Important in Estimation Theory as unbiasedness is generally, but not always, a requirement for ``good'' estimator
+     \item Theory can be applied to any problems that require estimation of a parameter 
+ \end{itemize}   
+\end{frame}
 % These three lines create an automatically generated table of contents.
 \begin{frame}{Outline}
   \tableofcontents
@@ -88,7 +96,7 @@ For every sufficiently large $n$, we say that $\theta$ \textit{admits an unbiase
 % \end{enumerate}
 % \end{frame}
 
-\begin{frame}{Characterization of Functionals}
+\begin{frame}{Characterization of $\theta$}
 
   \begin{theorem}
 (\cite{halmos1946theory}) With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
@@ -101,7 +109,7 @@ for all $F \in \mathcal{F}$.
  
 \end{frame}
 
-\begin{frame}{Characterization of Sets $\mathcal{F}$}
+\begin{frame}{Characterization of $\mathcal{F}$}
 \begin{Def}
 A function is \textit{symmetric} if it is invariant under permutations of its arguments. 
 \end{Def}
@@ -116,7 +124,7 @@ Let $\mathcal{F}$ contain all distributions with finite support in E (some Borel
 \end{Lemma}
 \end{frame}
 
-\begin{frame}{Characterization of Sets $\mathcal{F}$}
+\begin{frame}{Characterization of $\mathcal{F}$}
 
 \begin{theorem}\label{unique}
 Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let $\theta$ be a regular functional satisfying Equation \ref{unbiased_est}. Then up to equality on $E$, there is a unique symmetric unbiased estimator of $\theta$.
@@ -124,7 +132,7 @@ Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let 
 \pause 
 \begin{proof}
 \begin{itemize}
-    \item Define a symmetric function $\psi^{[n]}(x_1, \dotsc, x_n) = \frac{(n-1)!}{n!}\sum \psi(x_{i_1}, \dotsc, x_{i_k})$.
+    \item Define a symmetric function $\psi^{[n]}(x_1, \dotsc, x_n) = \frac{(n-1)!}{n!}\sum_{(n)} \psi(x_{i_1}, \dotsc, x_{i_k})$.
     \item $\psi^{[n]}$ is unbiased since the random variables are i.i.d and $\psi(x_{i_1}, \dotsc, x_{i_k})$ is a kernel function.
 
     \item Consider another symmetric unbiased estimator $f$.
@@ -136,7 +144,7 @@ Let $\mathcal{F}$ contain all distributions with finite support in $E$, and let 
 
 \begin{frame}{Characterization of ``Best'' Estimator}
  \begin{theorem}
-    Suppose that $E = \R$. Let $\theta$ be a regular functional of degree k defined by Equation \ref{unbiased_est} on a set of $\mathcal{F}$ of distribution functions containing all distributions having finite support. Let $f$ be an unbiased estimate of $\theta$ based on a sample of size n, so that $f$ satisfies Equation \ref{unbiased}. Then $var(f) \geq var(\psi^{[n]})$ for all $F \in \mathcal{F}$. 
+    Suppose that $E = \R$. Let $\theta$ be a regular functional of degree k defined by Equation \ref{unbiased_est} on a set $\mathcal{F}$ of distribution functions containing all distributions having finite support. Let $f$ be an unbiased estimate of $\theta$ based on a sample of size n, so that $f$ satisfies Equation \ref{unbiased}. Then $var(f) \geq var(\psi^{[n]})$ for all $F \in \mathcal{F}$. 
     \end{theorem}
 
     % \begin{proof}
@@ -173,7 +181,7 @@ have desirable properties as estimators of regular functionals. These statistics
 \end{frame}
 \begin{frame}{Examples}
 \begin{ex}\textbf{Sample mean}
-Let $\mathcal{F}$ be the set of all distributions whose means exist, which includes sets $\mathcal{F}$ that contain all distributions that have finite support on $\R$. The mean functional is given by $\theta(F) = \int_{-\infty}^{\infty} x dF(x)$. Using Equation \ref{u_stat}, we have that $k=1$ and $\psi(X_{i_1}) = x_{i_1}$, which gives $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
+Let $\mathcal{F}$ be the set of all distributions whose means exist, which includes sets $\mathcal{F}$ that contain all distributions that have finite support on $\R$. The mean functional is given by \begin{align*}\theta(F) = \int_{-\infty}^{\infty} x dF(x).\end{align*} Using Equation \ref{u_stat}, we have that $k=1$ and $\psi(X_{i_1}) = x_{i_1}$, which gives \begin{align*}\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i.\end{align*}
 \end{ex}
 % \pause
 % \begin{ex}\textbf{Sample variance}
@@ -325,7 +333,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 
 \begin{frame}{H-decomposition}
 \begin{fontsize}{8}{12}
-     We denote the $c$th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h^{(j)}$ has these properties: 
+     We denote the $c$-th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h^{(j)}$ has these properties: 
     \begin{theorem}
     \begin{itemize}
         \item For $c = 1, \dotsc, j-1$ and $j = 1, \dotsc, k$, $h_c^{(j)}(x_1, \dotsc, x_c) = 0$
@@ -467,13 +475,13 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \section{Reverse Martingales}
 \begin{frame}{Reverse Martingales}
 \begin{Def}
-An integrable sequence $\{X_n: n\ge 1\}$ adapted to an increasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a martingale if
+An integrable sequence $\{X_n: n\ge 1\}$ adapted to an increasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a \textit{martingale} if
 \begin{align*}
  E(X_{n+1}|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge0.
 \end{align*}
 \end{Def}
 \begin{Def}
-An integrable sequence $\{X_n: n\ge 1\}$ adapted to a decreasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a reverse martingale if
+An integrable sequence $\{X_n: n\ge 1\}$ adapted to a decreasing sequence of sub $\sigma$-fields $\{F_n: n\ge 0\}$ is a \textit{reverse martingale} if
 \begin{align*}
  E(X_m|\mathcal{F}_n)=X_n \hspace{0.2cm} a.s., \forall n\ge m.
 \end{align*}
