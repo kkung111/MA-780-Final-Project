@@ -408,7 +408,7 @@ The variance of $U_n$ is given by
           &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} h^{(1)}(X_i) + \sqrt{n}R_n 
           = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(X_i) + \sqrt{n}R_n.
           \end{align*}
-      Note that $\sum_{i = 1}^{n} h^{(1)}(X_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(X_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (x_i) ) = 0$$
+      Note that $\sum_{i = 1}^{n} h^{(1)}(X_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(X_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (X_i) ) = 0$$
       by Theorem 10 (ii). 
       \end{proof}
       \end{fontsize}
@@ -422,7 +422,7 @@ The variance of $U_n$ is given by
       Next, by orthogonality of $H_n$ and $R_n$,
       \begin{align*}
           Var(\sqrt{n}(U_n - \theta) ) &= Var(\sqrt{n} U_n) + Var(\sqrt{n}R_n) 
-          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
+          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (X_i) )  + n Var(R_n) \\
           &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) 
           = k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
           &= k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
@@ -430,7 +430,7 @@ The variance of $U_n$ is given by
       \end{align*}
       Hence asymptotically we have $Var(\sqrt{n}(U_n - \theta) ) = k^2 \sigma_1^2$. 
       By Markov's inequality, for all $\epsilon > 0,$ $P(|\sqrt{n}R_n > \epsilon| ) < \frac{Var(\sqrt{n} R_n)}{\epsilon^2} \rightarrow 0$ as $n \rightarrow \infty$.
-      By Slutsky's theorem, the asymptotic behavior of $\sqrt{n}(U_n - \theta)$ only depends on that of $ \sum_{i = 1}^{n}h^{(1)} (x_i)$. So, $ \sqrt{n}(U_n - \theta) \xrightarrow{\mathcal{D}} \mathcal{N}(0, k^2 \sigma_1^2 ).$
+      By Slutsky's theorem, the asymptotic behavior of $\sqrt{n}(U_n - \theta)$ only depends on that of $ \sum_{i = 1}^{n}h^{(1)} (X_i)$. So, $ \sqrt{n}(U_n - \theta) \xrightarrow{\mathcal{D}} \mathcal{N}(0, k^2 \sigma_1^2 ).$
     \end{proof}
     \end{fontsize}
 \end{frame}
