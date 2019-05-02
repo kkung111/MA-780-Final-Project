@@ -355,7 +355,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
     \begin{frame}{H-decomposition cont.}
         H-decomposition is useful because
         \begin{itemize}
-            \item variance of the component U-statistics $H_n^{(j)}$ are of order $n^{j}$
+            \item variance of the component U-statistics $H_n^{(j)}$ are of order $n^{-j}$
             \item $H_n^{(j)}$'s are uncorrelated
         \end{itemize}
         \begin{theorem}
@@ -376,7 +376,7 @@ The variance of $U_n$ is given by
     \end{theorem}
     Relations describing $\sigma_{c}^2$ in terms of the $\delta_j^2 $ and vice versa can be derived as follows: from the definition of H-decomposition, we have 
     \begin{align*}
-        \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{c,j} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
+        \phi_c (X_1, \cdots, X_c) = \sum_{j = 1}^c \sum_{(c,j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j}) + \theta
     \end{align*}
      Take variance of both sides,  we get 
     \begin{align*}
@@ -418,17 +418,17 @@ The variance of $U_n$ is given by
       \begin{fontsize}{7}{12}
       \begin{proof}
         Similarly, we have $$E(\sqrt{n}R_n) = \sqrt{n} \sum_{j = 2}^k {k \choose 1} E(H_n^{(j)}) = 0,$$
-      thus $E\left( n^{\frac{1}{2}}(U_n - \theta) \right) = 0. $ 
+      thus $E\left( \sqrt{n}(U_n - \theta) \right) = 0. $ 
       Next, by orthogonality of $H_n$ and $R_n$,
       \begin{align*}
           Var(\sqrt{n}(U_n - \theta) ) &= Var(\sqrt{n} U_n) + Var(\sqrt{n}R_n) 
           = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
           &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) 
-          = k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
-          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
-          = k^2 \sigma^2 + \mathcal{O}(n^{-1}).
+          = k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
+          &= k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
+          = k^2 \sigma_1^2 + \mathcal{O}(n^{-1}).
       \end{align*}
-      Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$. 
+      Hence asymptotically we have $Var(\sqrt{n}(U_n - \theta) ) = k^2 \sigma_1^2$. 
       By Markov's inequality, for all $\epsilon > 0,$ $P(|\sqrt{n}R_n > \epsilon| ) < \frac{Var(\sqrt{n} R_n)}{\epsilon^2} \rightarrow 0$ as $n \rightarrow \infty$.
       By Slutsky's theorem, the asymptotic behavior of $\sqrt{n}(U_n - \theta)$ only depends on that of $ \sum_{i = 1}^{n}h^{(1)} (x_i)$. So, $ \sqrt{n}(U_n - \theta) \xrightarrow{\mathcal{D}} \mathcal{N}(0, k^2 \sigma_1^2 ).$
     \end{proof}
