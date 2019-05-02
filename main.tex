@@ -378,6 +378,7 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
     \end{frame}
     
     \begin{frame}{H-decomposition}
+    \begin{fontsize}{7}{12}
     Take variance of both sides,  we get 
     \begin{align*}
         \sigma_{c}^2 &= \sum_{j = 1}^c Var\{ \sum_{(c, j)} h^{(j)} (X_{i_{1}}, \cdots , X_{i_j})\} \\
@@ -390,15 +391,13 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
        \sum_{j = 1}^c {c \choose j}  {d \choose c} (-1)^{d-c} \delta_j^2 \\
        &= \sum_{j=1}^d \left\{ \sum_{c = 0}^{d - j} {d - j \choose c} (-1)^c \right\} (-1)^{d -j} {d \choose j} \delta_j^2.
     \end{align*}
-    \end{frame}
-    
-    \begin{frame}{H-decomposition}
     The term inside the braces is zero except when $j = d$; hence we get 
     \begin{align*}
         \delta_d^2 = \sum_{c = 1}^d (-1)^{b-c} {d \choose c} \sigma_{c}^2
     \end{align*}
-    
+    \end{fontsize}
     \end{frame}
+    
     
 
 \section{Central Limit Theorem}
@@ -412,21 +411,8 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
     \end{proof}
 \end{frame}
 
-
-\begin{frame}{CLT of U-statistics for Independent r.v.s}
-\begin{theorem}
-    Let $X_1, X_2, \cdots,$ be independent r.v.s with distribution functions $F_1, F_2, \cdots$. Define for $i = 1,2, \cdots, n$
-    \begin{align}
-        \phi_{1,i} (x) = {n-1 \choose k-1}^{-1} \sum_{(n-1, k-1)}^{(-i)} \phi_{1, i; i_2, \cdots, i_k}(x)
-    \end{align}
-    where the sum is taken over all $(k-1)$-subsets $\{i_2, \cdots, i_k\}$ of $\{1,2, \cdots, n\}$ that do not contain $i$, and 
-    \begin{align}
-        \phi_{1, i; i_2, \cdots, i_k}(x) = E \phi(x, X_{i2}, \cdots, X_{i_k}) - \theta(i, i_2, \cdots, i_k).
-    \end{align}
-    \end{theorem}
-    \end{frame}
     
-    \begin{frame}{CLT for U-statistics for Independent r.v.s cont.}
+    \begin{frame}{CLT for U-statistics for Independent r.v.s}
     \begin{fontsize}{6}{12}
 
     \begin{theorem}
