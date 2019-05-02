@@ -236,7 +236,7 @@ where $S_1, S_2$ are two subsets of size $k$ from $\{1, \dotsc, n\}$ with $c$ el
 
 \begin{frame}{Conditional Expectation}
 \begin{theorem}
-We first define $\sigma_{c,d}^2 = cov(\psi_c(X_1, \dotsc, X_c), \phi_d(X_1, \dotsc, X_d)$. Suppose that $c \leq d$ and $k_1 \leq k_2$. If $S_1$ is in $S_{n,k_1}$ and $S_2$ in $S_{n, k_2}$ with $|S_1 \cap S_2| = c$, then 
+We first define $\sigma_{c,d}^2 = cov(\psi_c(X_1, \dotsc, X_c), \phi_d(X_1, \dotsc, X_d))$. Suppose that $c \leq d$ and $k_1 \leq k_2$. If $S_1$ is in $S_{n,k_1}$ and $S_2$ in $S_{n, k_2}$ with $|S_1 \cap S_2| = c$, then 
     \begin{align}
     \sigma_{c,d}^2 = cov(\psi(S_1), \phi(S_2))
     \end{align}
@@ -333,7 +333,7 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 
 \begin{frame}{H-decomposition cont. }
 \begin{fontsize}{8}{12}
-     We denote the $c$-th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h^{(j)}$ has these properties: 
+     We denote the $c$-th conditional expectation of $h^{(j)}$ by $h_c^{(j)}$. Then $h_c^{(j)}$ has these properties: 
     \begin{theorem}
     \begin{itemize}
         \item For $c = 1, \dotsc, j-1$ and $j = 1, \dotsc, k$, $h_c^{(j)}(x_1, \dotsc, x_c) = 0$
@@ -355,8 +355,8 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
     \begin{frame}{H-decomposition cont.}
         H-decomposition is useful because
         \begin{itemize}
-            \item variance of the component U-statistics $H_n^{j}$ are of order $n^{j}$
-            \item $H_n^{j}$'s are uncorrelated
+            \item variance of the component U-statistics $H_n^{(j)}$ are of order $n^{j}$
+            \item $H_n^{(j)}$'s are uncorrelated
         \end{itemize}
         \begin{theorem}
     \begin{itemize}
