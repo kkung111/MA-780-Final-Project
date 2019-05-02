@@ -81,15 +81,15 @@ We denote $\theta$ as a \textit{functional} defined on a set $\mathcal{F}$ of di
 For every sufficiently large $n$, we say that $\theta$ \text{admits an unbiased estimator} if there is a function $f_n(X_1, \dotsc, X_n)$ on $n$ variables such that \begin{align}\label{unbiased} E(f_n(X_1, \dotsc, X_n)) = \theta(F).\end{align}
 \end{Def}
 
-In 1946, Paul Halmos (\cite{halmos1946theory,}) asked two questions that prompted the study of U-statistics:
-\begin{enumerate}
-    \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
-    \item If such an estimator exists, what is it? If several exist, which is the best?
-\end{enumerate}
+% In 1946, Paul Halmos (\cite{halmos1946theory,}) asked two questions that prompted the study of U-statistics:
+% \begin{enumerate}
+%     \item Does there exist an estimator of $\theta$ that will be unbiased whatever the distribution function $F$ may be? Can we characterize the sets $\mathcal{F}$ and the functionals $\theta$ for which the answer is yes?
+%     \item If such an estimator exists, what is it? If several exist, which is the best?
+% \end{enumerate}
 
-These questions will be answered throughout this handout. In fact, Halmos answers the part of the first question with the following theorem. 
+% These questions will be answered throughout this handout. In fact, Halmos answers the part of the first question with the following theorem. 
 \begin{theorem}
-With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
+(\cite{halmos1946theory}) With a sample of random variables $X_1, \dotsc, X_n$, a functional $\theta$ defined on a set $\mathcal{F}$ of distribution functions admits an unbiased estimator if and only if there is a function $\psi$ of k variables such that 
 \begin{align}\label{unbiased_est}
     \theta(F) = \int_{-\infty}^{\infty} \dotsc \int_{-\infty}^{\infty} \psi(x_1, x_2, \dotsc, x_k)dF(x_1) \dotsc dF(x_k)
 \end{align}
