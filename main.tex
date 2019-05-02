@@ -324,18 +324,6 @@ We can represent the functions $h^{(c)}$ in another way. Let $G_x$ denote the di
 \end{frame}
 
 \begin{frame}{H-decomposition}
-The variances of the conditional expectations of $h^{(j)}$ are all zero, except the j-th. We define 
-    \begin{align}
-        \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
-    \end{align}
-    
-    Then, we have that 
-    \begin{align}
-        var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
-    \end{align}
-\end{frame}
-
-\begin{frame}{H-decomposition}
      Some properties of $h^{(j)}$ include
     \begin{theorem}
     \begin{itemize}
@@ -401,14 +389,46 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
     
 
 \section{Central Limit Theorem}
-\begin{frame}{CLT}
-    \begin{theorem}
+\begin{frame}{CLT for i.i.d case}
+
+\begin{fontsize}{7}{12}  
+\begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
     \end{theorem}
     
     \begin{proof}
-    
+      First, by definition of H-decomposition, we have 
+      \begin{align*}
+          \sqrt{n}(U_n - \theta) &= \sqrt{n} \left( {k \choose 1} H_n^{(1)} + R_n \right) 
+          = \sqrt{n} \left( k {n \choose 1}^{-1} \sum_{ (n,1) } h^{(1)} + R_n \right) \\
+          &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n 
+          = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n.
+          \end{align*}
+      Note that $\sum_{i = 1}^{n} h^{(1)}(x_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (x_i) ) = 0$$
+      by Theorem 10 (ii). 
+      \end{proof}
+      \end{fontsize}
+      \end{frame}
+      
+      \begin{frame}{CLT proof cont. }
+      \begin{fontsize}{7}{12}
+      \begin{proof}
+        Similarly, we have $$E(\sqrt{n}R_n) = \sqrt{n} \sum_{j = 2}^k {k \choose 1} E(H_n^{(j)}) = 0,$$
+      thus $E\left( n^{\frac{1}{2}}(U_n - \theta) \right) = 0. $ 
+      Next, by orthogonality of $H_n$ and $R_n$,
+      \begin{align*}
+          Var(\sqrt{n}(U_n - \theta) ) &= Var(\sqrt{n} U_n) + Var(\sqrt{n}R_n) 
+          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
+          &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) 
+          = k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
+          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
+          = k^2 \sigma^2 + \mathcal{O}(n^{-1}).
+      \end{align*}
+      Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$. 
+      By Markov's inequality, for all $\epsilon > 0,$ $P(|\sqrt{n}R_n > \epsilon| ) < \frac{Var(\sqrt{n} R_n)}{\epsilon^2} \rightarrow 0$ as $n \rightarrow \infty$.
+      By Slutsky's theorem, the asymptotic behavior of $\sqrt{n}(U_n - \theta)$ only depends on that of $ \sum_{i = 1}^{n}h^{(1)} (x_i)$. So, $ \sqrt{n}(U_n - \theta) \xrightarrow{\mathcal{D}} \mathcal{N}(0, k^2 \sigma_1^2 ).$
     \end{proof}
+    \end{fontsize}
 \end{frame}
 
     
@@ -435,6 +455,10 @@ The variances of the conditional expectations of $h^{(j)}$ are all zero, except 
     \end{itemize}
     \end{theorem}
     \end{fontsize}
+  \end{frame}
+  
+  \begin{frame}{CLT independent case proof sketch}
+      
   \end{frame}
 
 \section{Reverse Martingales}

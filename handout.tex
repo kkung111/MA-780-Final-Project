@@ -409,7 +409,7 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \section{Asymptotics} 
     Many of the classical results of probability theory dealing with of sums of independent and identically distributed random variables have generalizations to U-statistics. In this section we present two versions of Central Limit theorem, one is the case of i.i.d. r.v.s, the second is the case where we no longer have identically distributed, but the r.v.s still remain independent. 
     The main tool for this study is H-decomposition. We start with the class of U-statistics with the simplest asymptotic behavior, those that are asymptotically normally distributed. 
-    
+    \subsection{Central Limit Theorem}
     \begin{theorem}
     Let $\sigma_1^{2} > 0$. Then $n^{\frac{1}{2}}(U_n - \theta)$ is asymptotically normal with mean zero and asymptotic variance $k^2 \sigma_1^2$.
     \end{theorem}
@@ -417,25 +417,26 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \begin{proof}
       First, by definition of H-decomposition, we have 
       \begin{align*}
-          n^{\frac{1}{2}}(U_n - \theta) &= n^{\frac{1}{2}} \left( {k \choose 1} H_n^{(1)} + R_n \right) \\
-          &= n^{\frac{1}{2}} \left( k {n \choose 1}^{-1} \sum_{ (n,1) } h^{(1)} + R_n \right) \\
-          &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} (x_i) + \sqrt{n}R_n \\
-          &= \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} (x_i) + \sqrt{n}R_n. 
+          n^{\frac{1}{2}}(U_n - \theta) &= n^{\frac{1}{2}} \left( {k \choose 1} H_n^{(1)} + R_n \right) 
+          = n^{\frac{1}{2}} \left( k {n \choose 1}^{-1} \sum_{ (n,1) } h^{(1)} + R_n \right) \\
+          &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n 
+          = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n. 
       \end{align*}
-      Note that $\sum_{i = 1}^{n} (x_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} (x_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n} (x_i) )  = 0$$
+      Note that $\sum_{i = 1}^{n} h^{(1)}(x_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (x_i) ) = 0$$
       by Theorem 10 (ii). Similarly, we have $$E(\sqrt{n}R_n) = \sqrt{n} \sum_{j = 2}^k {k \choose 1} E(H_n^{(j)}) = 0,$$
       thus $E\left( n^{\frac{1}{2}}(U_n - \theta) \right) = 0. $ 
       Next, we look at the variance of $n^{\frac{1}{2}}(U_n - \theta)$. By orthogonality of $H_n$ and $R_n$,
       \begin{align*}
-          Var(n^{\frac{1}{2}}(U_n - \theta) ) &= Var(n^{\frac{1}{2}} U_n) + Var(\sqrt{n}R_n) \\
-          &= \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
-          &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) \\
-          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
-          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 \\
-          &= k^2 \sigma^2 + \mathcal{O}(n^{-1}).
+          Var(n^{\frac{1}{2}}(U_n - \theta) ) &= Var(n^{\frac{1}{2}} U_n) + Var(\sqrt{n}R_n) 
+          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
+          &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) 
+          = k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
+          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
+          = k^2 \sigma^2 + \mathcal{O}(n^{-1}).
       \end{align*}
       Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$. 
-      
+      Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$.
+      Note that by Markov's inequality, for all $\epsilon > 0,$ $P(|\sqrt{n}R_n > \epsilon| ) < \frac{Var(\sqrt{n} R_n)}{\epsilon^2} \rightarrow 0$ as $n \rightarrow \infty$, so by Slutsky's theorem, the asymptotic behavior of $\sqrt{n}(U_n - \theta)$ only depends on that of $ \sum_{i = 1}^{n}h^{(1)} (x_i)$. That is , $ \sqrt{n}(U_n - \theta) \xrightarrow{\mathcal{D}} \mathcal{N}(0, k^2 \sigma_1^2 ).$
     \end{proof}
     
     
@@ -459,6 +460,10 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
        Then $(U_n - E(U_n)) / (Var U_n)^{\frac{1}{2}} \xrightarrow{\mathcal{D}} N(0,1).$ 
     \end{enumerate}
     \end{theorem}
+    
+    \begin{proof}
+    
+    \end{proof}
 \section{Martingales for U-statistics}
 \subsection{Reverse martingales}
 First, recall the definition of a martingale from class:
