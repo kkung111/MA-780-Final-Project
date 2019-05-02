@@ -426,22 +426,22 @@ As we now have the explicit formula for $\delta_j$ and $h^{(j)}$, we rewrite $Va
     \begin{proof}
       First, by definition of H-decomposition, we have 
       \begin{align*}
-          n^{\frac{1}{2}}(U_n - \theta) &= n^{\frac{1}{2}} \left( {k \choose 1} H_n^{(1)} + R_n \right) 
-          = n^{\frac{1}{2}} \left( k {n \choose 1}^{-1} \sum_{ (n,1) } h^{(1)} + R_n \right) \\
-          &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n 
-          = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i) + \sqrt{n}R_n. 
+          \sqrt{n}(U_n - \theta) &= n^{\frac{1}{2}} \left( {k \choose 1} H_n^{(1)} + R_n \right) 
+          = \sqrt{n} \left( k {n \choose 1}^{-1} \sum_{ (n,1) } h^{(1)} + R_n \right) \\
+          &= \frac{\sqrt{n}}{n} k \sum_{i = 1}^{n} h^{(1)}(X_i) + \sqrt{n}R_n 
+          = \frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(X_i) + \sqrt{n}R_n. 
       \end{align*}
-      Note that $\sum_{i = 1}^{n} h^{(1)}(x_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(x_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (x_i) ) = 0$$
-      by Theorem 10 (ii). Similarly, we have $$E(\sqrt{n}R_n) = \sqrt{n} \sum_{j = 2}^k {k \choose 1} E(H_n^{(j)}) = 0,$$
-      thus $E\left( n^{\frac{1}{2}}(U_n - \theta) \right) = 0. $ 
-      Next, we look at the variance of $n^{\frac{1}{2}}(U_n - \theta)$. By orthogonality of $H_n$ and $R_n$,
+      Note that $\sum_{i = 1}^{n} h^{(1)}(X_i)$ is i.i.d by assumption, and $$ E (\frac{k}{\sqrt{n}} \sum_{i = 1}^{n} h^{(1)}(X_i)) = \frac{k}{\sqrt{n}} E( \sum_{i = 1}^{n}h^{(1)} (X_i) ) = 0$$
+      by Theorem 10 (ii). Similarly, we have $$E(\sqrt{n}R_n) = \sqrt{n} \sum_{j = 2}^k {j \choose 1} E(H_n^{(j)}) = 0,$$
+      thus $E\left( \sqrt{n}(U_n - \theta) \right) = 0. $ 
+      Next, we look at the variance of $\sqrt{n}(U_n - \theta)$. By orthogonality of $H_n$ and $R_n$,
       \begin{align*}
           Var(n^{\frac{1}{2}}(U_n - \theta) ) &= Var(n^{\frac{1}{2}} U_n) + Var(\sqrt{n}R_n) 
-          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (x_i) )  + n Var(R_n) \\
+          = \frac{k^2}{n} \sum_{i = 1}^n Var(h^{(1)} (X_i) )  + n Var(R_n) \\
           &= \frac{k^2}{n} n \sigma_1^2 + n Var( \sum_{j = 2}^k {k \choose j} H_n^{(j)}) 
-          = k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
-          &= k^2 \sigma^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
-          = k^2 \sigma^2 + \mathcal{O}(n^{-1}).
+          = k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 Var(H_n^{(j)}) \\
+          &= k^2 \sigma_1^2 + n \sum_{j = 2}^k {k \choose j}^2 {n \choose j}^{-1} \delta_j^2 
+          = k^2 \sigma_1^2 + \mathcal{O}(n^{-1}).
       \end{align*}
       Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$. 
       Hence asymptotically we have $Var(n^{\frac{1}{2}}(U_n - \theta) ) = k^2 \sigma^2$.
