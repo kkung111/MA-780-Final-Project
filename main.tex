@@ -506,7 +506,7 @@ Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\
 h^{(1)}(x_1)&=\psi_1(x_1)-\theta\\
 h^{(c)}(x_1,\dotsc,x_c)&=\psi_c(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
 \end{align*}
-Since  and $\psi_1(x_1)$ is integrable by law of total expectation and the assumption that $E|\psi(X_1, \dotsc, X_k)|<\infty$, then $h^{(1)}(x_1)$ is integerable. Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
+Since $\psi_1(x_1)$ is integrable by law of total expectation and the assumption that $E|\psi(X_1, \dotsc, X_k)|<\infty$, then $h^{(1)}(x_1)$ is integerable. Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
 \end{itemize}
 \end{proof}
 \end{fontsize}
@@ -523,7 +523,7 @@ E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}&=
 &=\sum_{(n,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})={n\choose c}H_n^{(c)}
 \end{align*}
 \end{itemize}
- $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exist $l$ indices with $i_j\ge n+1$, Since the inherent symmetry property of the kernal function, w.l.o.g we can assume that the first $l$ random variabels are not measurable, then by Theorem 2 (i) for the H-decomposition.
+ $E\{h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=h^{(c)}(X_{i_1},\dotsc,X_{i_c})$ provided all the indices $i_j\le n$ for all $j \in \{i,\dotsc, c\}$. If there exists $l$ indices with $i_j\ge n+1$, because of the inherent symmetry property of the kernel function, w.l.o.g we can assume that the first $l$ random variables are not measurable. Then by Theorem 2 (i) for the H-decomposition,
 \begin{align*}
 E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},X_{i_{l+1}},\dotsc, X_{i_c})|\mathcal{F}_n\}&=E\{h^{(c)}(X_{i_1},\dotsc,X_{i_l},x_{i_{l+1}},\dotsc, x_{i_c})\}\\&=h^{(c)}_{c-l}(x_{i_1},\dotsc,x_{i_c})=0
 \end{align*}
@@ -537,7 +537,7 @@ Let $U_n$ be a sequence of U-statistics based on a kernel $\psi$ satisfying $E|\
 \end{theorem}
 \begin{proof}
 \begin{fontsize}{9}{12}
-By the inherent symmetry of the kernel $\psi$ and that samples $X_1, \dotsc, X_k$ are i.i.d, write:
+By the inherent symmetry of the kernel $\psi$ and the fact that samples $X_1, \dotsc, X_k$ are i.i.d, write:
 \begin{align*}
     E(\psi (X_{i_1}, \dotsc, X_{i_k})|\mathcal{F}_n)=E(\psi (X_1, \dotsc, X_k)|\mathcal{F}_n)
 \end{align*}
