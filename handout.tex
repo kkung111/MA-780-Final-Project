@@ -316,7 +316,33 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \end{enumerate}
     \end{theorem}
     
-    \item The variances of the conditional expectations of $h^{(j)}$ are all zero, except the j-th. We define 
+    \begin{proof}
+    By Definition 2.1, we can write $$h_{j-1}^{(j)} = E\{h^{(j)} (x_1, \cdots, x_{j-1}, X_j)\}$$
+    then by equation (14), we can write 
+    \begin{align*}
+        h^{(j)}(x_1, \dotsc, x_j) = \int \dotsc \int &\psi(u_1, \dotsc, u_k) \prod_{i=1}^j(dG_{x_i}(u_i) - dF(u_i))\prod_{j+1}^kdF(u_i) \\
+        = \int \dotsc \int &\psi(u_1, \dotsc, x_j, \cdots, u_k) \prod_{i=1}^{j-1}(dG_{x_i}(u_i) - dF(u_i))\prod_{i =j+1}^k dF(u_i) \\
+        - &\int \dotsc \int \psi(u_1, \dotsc, u_k) \prod_{i=1}^{j-1}(dG_{x_i}(u_i) - dF(u_i))\prod_{i =j}^kdF(u_i) \\
+        = \int \dotsc \int &\psi(u_1, \cdots, u_k) \prod_{i=1}^{j-1}(dG_{x_i}(u_i) - dF(u_i))\prod_{i =j+1}^k dF(u_i) - h^{(j-1)}(x_1, \dotsc, x_{j-1}).\label{h_func_rep}
+    \end{align*}
+    Integrating both sides of equation (15) with respect to $\mu_j$ gives us 
+    \begin{align*}
+        E\{h^{(j)}(x_1, \dotsc, x_{j-1}, X_j) \} &= h^{(j-1)}(x_1, \dotsc, x_{j-1})  - h^{(j-1)}(x_1, \dotsc, x_{j-1})\\
+        &= 0.
+    \end{align*}
+    Then by Theorem 4,
+    \begin{align*}
+        h_c^{(j)}(x_1, \dotsc, x_c) &= E\{h_{j-1}^{(j)}(x_1, \dotsc, x_c, X_{c+1}, \cdots, X_{j-1}\} \\
+        &= 0,
+    \end{align*}
+    this completes the proof for part (i). 
+    Using Theorem 4 part (ii) we see that 
+    \begin{align*}
+        E\{h^{(j)}( X_{1}, \cdots, X_{j}\} &= E\{h_c^{(j)}( X_{1}, \cdots, X_{c}\} = 0.\label{h_func_rep}
+    \end{align*}
+    This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the jth.
+    \end{proof}
+ We now define 
     \begin{align}
         \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
     \end{align}
