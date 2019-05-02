@@ -497,7 +497,7 @@ The $\sigma$-fields $\mathcal{F}_n$ are increasing clearly. It's also easy to ch
 \begin{align*}
 h^{(c)}(x_1,\dotsc,x_c)=\psi_c(x_1,\dotsc,x_c)-\sum_{j+1}^{c-1}\sum_{(c,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})-\theta
 \end{align*}
-Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
+Recursively we can get $h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is integrable and $H_n^{(j)}={n\choose j}^{-1}\sum_{(n,j)}h^{(j)}(x_{i_1},\dotsc,x_{i_j})$ is also integrable.
 Then we have 
 \begin{align*}
 E\{{{n+1}\choose c} H_{n+1}^{(c)}|\mathcal{F}_n\}=E\{{{n+1}\choose c}{{n+1}\choose c}^{-1}\sum_{(n+1,c)}h^{(c)}(X_{i_1},\dotsc,X_{i_c})|\mathcal{F}_n\}=
