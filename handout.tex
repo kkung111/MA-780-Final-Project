@@ -309,6 +309,9 @@ We can represent the functions $h^{(c)}$ in a slightly different manner. First, 
 Here, the relation in Equation \ref{h_func_rep} is derived by taking the product of $dG_{x_i}(u_i)$. In particular, we have $\prod_{i=1}^kdG_{x_i}(u_i) = \prod_{i=1}^k\left[(dG_{x_i}(u_i) - dF(u_i)) + dF(u_i) \right]$, which leads to $$\prod_{i=1}^kdG_{x_i}(u_i) = \sum_{c=0}^k \sum_{(k,c)}\prod_{j=1}^c\left(dG_{x_{i_j}}(u_{i_j}) - dF(u_{i_j})\right)\prod_{c+1}^k dF(u_{i'_j}).$$
 \end{Rmk}
 
+We need to develop some properties for the functions $h^{(j)}$ by first studying the mean and conditional variance. For notation purpose, we denote the cth conditional expectation of $h^{(j)}$ by $h_c^{(j)}$.
+
+
 \begin{theorem}
     \begin{enumerate} [label = (\roman*)]
         \item For $c = 1, \dotsc, j-1$ and $j = 1, \dotsc, k$, $h_c^{(j)}(x_1, \dotsc, x_c) = 0$
@@ -338,14 +341,15 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     \begin{align}
         E\{h^{(j)}( X_{1}, \cdots, X_{j}\} &= E\{h_c^{(j)}( X_{1}, \cdots, X_{c}\} = 0.
     \end{align}
-    This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the j-th.
     \end{proof}
+    This shows that the variance of the conditional expectation of the $h^{(j)}$ are all zero, except the j-th.
+    
  We now define 
     \begin{align}
         \delta_j^2 = var(h_j^{(j)}(X_1, \dotsc, X_j)) = var(h^{(j)}(X_1, \dotsc, X_j))
     \end{align}
     
-    Then, we have that 
+    Then, similar to Theorem 6, we have
     \begin{align}
         var(H_n^{(j)}) = {n \choose j}^{-1}\sum_{c=1}^j {j \choose c}{n-j \choose j-c}var(h_c^{(j)}(X_1, \dotsc X_c)) = {n \choose j}^{-1}\delta_j^2
     \end{align}
@@ -354,16 +358,28 @@ Here, the relation in Equation \ref{h_func_rep} is derived by taking the product
     
     \begin{theorem}
     \begin{enumerate} [label = (\roman*)]
-        \item Let $j <j'$ and let $S_1$ and $S_2$ be a j-subset of $\{1, \dotsc, n\}$ and a j'-subset of $\{1, \dotsc, n\}$, respectively. Then, $cov(h^{(j)}(S_1), h^{(j')}(S_2)) = 0$ and so $cov(H_n^{(j)}, H_n^{(j')}) = 0$
+        \item Let $j <j'$ and let $S_1$ and $S_2$ be a j-subset of $\{1, \dotsc, n\}$ and a $j'$-subset of $\{1, \dotsc, n\}$, respectively. Then, $cov(h^{(j)}(S_1), h^{(j')}(S_2)) = 0$ and so $cov(H_n^{(j)}, H_n^{(j')}) = 0$
         \item Let $S_1 \neq S_2$ be two distinct j-subsets of $\{1, \dotsc, n\}$. Then, $cov(h^{(j)}(S_1), h^{(j)}(S_2)) = 0$
     \end{enumerate}
     \end{theorem}
     
     
 \begin{proof}
-
+By the previous theorem (ii), $E(h^{(j)}(X_1, \dotsc, X_j)) = 0$ so we only need to prove $E\{h^{(j)}(S_1) h^{(j)}(S_2)\}$ = 0. Since $j < j'$, there's an element in $S2$ and is not in $S1$, thus, there exists some r.v. $X_{j'} \in h^{(j)}S_2$ but $X_{j'} \not \in h^{(j)}S_1$. Hence we have 
+\begin{align*}
+    E\{h^{(j)}(S_1)h^{(j)}(S_2)\} = E\{E(h^{(j)}(S_1)h^{(j)}(S_2) | X_{j'})\} = E\{h^{(j)}(S_1)E(h^{(j)}(S_2) | X_{j'})\}
+\end{align*}
+because $h^{(j)}(S_1)$ and $X_{j'}$ are independent. By first part of the previous theorem, we have  $E(h^{(j)}(S_2) | X_{j'}) = h_1^{j'}(X_{j'} = 0$, so we get $E\{h^{(j)}(S_1) h^{(j)}(S_2)\}$ = 0.
+For the second part of the theorem, we have 
+$$ cov(H_n^{(j)}, H_n^{(j')}) = \frac{1}{{n \choose j}^{1} {n \choose j'}^{1}} \sum_{(n,j)} \sum_{(n, j')} Cov(h^{(j)}(S_1)h^{(j')}(S_2) ) = 0.$$
+For part (ii) of the theorem, if $S_1 \cap S_2 = \emptyset$, then the covariance equals to zero by independence. Otherwise, suppose that $S_1$ and $S_2$ doesn't share some amount of variables, i.e., $S_2 - S_1 = \{i_1, \cdots, i_c\}$ with $c < j$. Then \begin{align*}
+    E(h^{(j)}(S_1), h^{(j)}(S_2)) &= E\{ E(h^{(j)}(S_1), h^{(j)}(S_2) | X_{i_1}, \cdots, X_{i_c})\} \\
+    &= E\{ h^{(j)}(S_1) E( h^{(j)}(S_2) | X_{i_1}, \cdots, X_{i_c})\} = 0
+\end{align*} 
+because by Theorem 10 (ii), $h_c^{(j)} (x_1, \cdots, x_c) = 0$.
 \end{proof}
 
+As we now have the explicit formula for $\delta_j$ and $h^{(j)}$, we rewrite $Var(U_n)$ as follows:
     
     \begin{theorem}
     The variance of $U_n$ is given by 
